@@ -1,0 +1,43 @@
+#history {
+    padding: 40px 0;
+}
+
+#history .section .heading {
+    margin: 40px 0 50px;
+}
+
+#history .history-sample {
+    margin-bottom: 30px;
+}
+
+#history .history-img {
+    position: relative;
+}
+
+#history .history-img img {
+    width: 100%;
+}
+
+#history .history-img .history-caption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-family: Blacksword;
+
+}
+
+#history .history-img .history-caption hr {
+    border: solid 4px white;
+    margin-bottom: 50px;
+}
+
+#history .history-img .history-caption h2 {
+    position: absolute;
+    width: 100%;
+    bottom: 25px;
+}
+
+#history .history-img .history-caption span {
+    font-family: Blacksword;
+}

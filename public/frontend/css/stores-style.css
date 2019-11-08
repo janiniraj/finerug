@@ -1,0 +1,84 @@
+#stores {
+    padding: 40px 0;
+}
+
+#stores .section .heading {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+#stores .section .heading h1 {
+    font-size: 26px;
+    margin-top: -35px;
+}
+
+#stores .shops {
+    font-size: 16px;
+}
+
+#stores .shops .box {
+    padding: 70px 15px;
+}
+
+#stores .shops .left {
+    float: left;
+}
+
+#stores .shops .right {
+    float: right;
+}
+
+#stores .search label {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+#stores .search input {
+    background: #bcbcbc;
+    border-radius: 0;
+    border: none;
+    color: white;
+}
+
+#stores .search input::placeholder {
+    color: white;
+}
+
+#stores .search input#search {
+    width: 270px;
+}
+
+#stores .search input#zip {
+    width: 140px;
+}
+
+#stores .online {
+    margin-top: 60px;
+}
+
+#stores .online .box {
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+#stores .retail .box {
+    font-size: 16px;
+    padding: 70px 15px;
+}
+
+@media screen and (max-width: 767px) {
+
+    #stores .shops .box {
+        float: none;
+        padding: 35px 15px;
+    }
+
+    #stores .shops, #stores .search, #stores .online, #stores .retail {
+        padding: 0 15px;
+    }
+
+    #stores .retail .box {
+        font-size: 16px;
+        padding: 35px 15px;
+    }
+
+}

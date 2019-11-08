@@ -1,0 +1,493 @@
+/* ////////////////////////Global CSS */
+/*@font-face {
+    font-family: FontAwesome;
+    src: url(../fonts/FontAwesome.otf);
+}*/
+
+@font-face {
+    font-family: FontAwesome;
+}
+
+body {
+    font-family: FontAwesome;
+}
+
+.slick-slide img {
+    width: 100%;
+}
+
+button.slick-next {
+    right: 25px;
+}
+
+button.slick-prev {
+    z-index: 9;
+    left: 25px;
+}
+
+.slick-slide {
+    position: relative;
+    margin: 0 10px;
+}
+
+button.slick-arrow:before {
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    color: #000;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#headerSlider button.slick-arrow:before {
+    color: #fff;
+}
+
+button.slick-prev:before {
+    content: "\e257";
+}
+
+button.slick-next:before {
+    content: "\e258";
+}
+
+/* ////////////////////////Navbar CSS */
+.navbar-default {
+    margin-bottom: 0;
+    background-color: white;
+}
+
+.navbar-default .container-fluid {
+    padding: 0;
+}
+
+.navbar-default .navbar-collapse {
+    padding: 0;
+}
+
+.navbar-default .navbar-collapse#socialNavbar {
+    position: relative;
+    margin-top: 15px;
+    padding-bottom: 35px;
+}
+
+ul.social li a {
+    margin: 5px;
+    padding: 5px;
+}
+
+ul.navbar-nav.social li a.login {
+    margin: 0;
+}
+
+ul.navbar-nav.social li a.heart {
+    margin: 0 2px;
+    color: #777;
+}
+
+ul.social li a.heart i {
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    font-size: 20px;
+}
+
+ul.navbar-nav.social li.rounded a {
+    border-radius: 50%;
+}
+
+ul.navbar-nav.social li.rounded a.facebook {
+    background-color: #4e71a8;
+}
+
+ul.navbar-nav.social li.rounded a.twitter {
+    background-color: #1cb7eb;
+}
+
+ul.navbar-nav.social li.rounded a.instagram {
+    background-color: #444;
+}
+
+ul.navbar-nav.social li.rounded a.youtube {
+    background-color: #ca3737;
+}
+
+ul.navbar-nav.social.phonenumber  {
+    position: absolute;
+    bottom: 0;
+    right: -15px;
+}
+
+ul.navbar-nav.social.phonenumber li a.number {
+    margin: 0;
+    padding-top: 8px;
+}
+
+ul.navbar-nav.social.phonenumber li a.number:hover {
+    background: none;
+}
+
+ul.navbar-nav.social.phonenumber li.rounded a.phone {
+    background-color: #009a39;
+}
+
+
+ul.social li.rounded a i {
+    display: block;
+    width: 14px;
+    height: 14px;
+    text-align: center;
+    color: white;
+    font-size: 12px;
+}
+
+ul.social li a i:before {
+    vertical-align: middle;
+}
+
+.navbar-default ul.navbar-nav li a {
+    font-size: 18px;
+    color: black;
+}
+
+.navbar-default ul.navbar-nav li a:hover {
+    background-color: #e7e7e7;
+}
+
+.navbar-default #socialNavbar ul.navbar-nav.navbar-right {
+    padding: 0 25px;
+}
+
+.navbar-default #mainNavbar ul.navbar-nav.navbar-right {
+    padding: 0 15px;
+}
+
+.navbar-default #mainNavbar ul.navbar-nav.navbar-right .dropdown.language ul.dropdown-menu {
+    min-width: 70px;
+}
+
+/* ////////////////////////Homepage CSS */
+#header {
+    overflow: hidden;
+    padding: 0;
+}
+
+#header .slick-slide {
+    margin: 0;
+}
+
+#header button.slick-arrow {
+    height: 75px;
+    width: 75px;
+}
+
+#header button.slick-arrow:before {
+    font-size: 75px;
+}
+
+#header .slick-slide .slide-caption {
+    position: absolute;
+    bottom: 30px;
+    right: 50px;
+    padding: 20px 40px;
+    background-color: rgba(255,255,255,0.2);
+    z-index: 99;
+}
+
+#header .slick-slide .slide-caption h1 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-family: FontAwesome;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+#header .slick-slide .slide-caption p {
+    margin-bottom: 2px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.sections {
+    margin-bottom: 40px;
+}
+
+.section {
+    overflow: hidden;
+}
+
+.section .heading {
+    font-family: FontAwesome;
+    margin: 40px 0 25px;
+    text-align: center;
+}
+
+.section .heading hr {
+    border: solid .5px;
+}
+
+.section .heading h1 {
+    margin-top: -42px;
+}
+
+.section .heading h1 span {
+    padding: 20px;
+    background-color: white;
+}
+
+#homepage .slick-slide img {
+    height: 300px;
+    object-fit: cover;
+}
+
+#homepage button.slick-arrow {
+    height: 45px;
+    width: 45px;
+}
+
+#homepage button.slick-arrow:before {
+    font-size: 45px;
+}
+
+#homepage .slick-slide .slide-caption {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    padding: 0 15px;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 7px 5px 15px #000;
+    text-align: left;
+    font-family: FontAwesome;
+    font-size: 20px;
+    color: white;
+}
+
+/* ////////////////////////Footer CSS */
+#footer {
+    position: relative;
+    padding: 40px;
+    background-color: #878585;
+    /*font-size: 16px;*/
+    color: white;
+}
+
+#footer .links {
+    display: flex;
+}
+
+#footer .links ul {
+    padding: 0;
+    list-style: none;
+    flex: 1;
+}
+
+#footer ul {
+    padding: 0;
+    list-style: none;
+    flex: 1;
+}
+
+#footer ul li {
+    padding-right: 10px;
+}
+
+#footer ul li a {
+    color: white;
+}
+
+#footer ul li.list-heading {
+    font-weight: bold
+}
+
+#footer ul li:not(.no-arrow):before {
+    content: "> ";
+}
+
+#footer form {
+    margin-bottom: 10px;
+}
+
+#footer .contacts label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#footer .contacts input {
+    border-radius: 0;
+    height: 36px;
+}
+
+#footer .contacts .input-group-btn button {
+    border-color: #b3b0b0;
+    border-radius: 0;
+    background-color: #b3b0b0;
+    color: white;
+    font-size: 16px;
+}
+
+#footer .chat {
+    position: absolute;
+    bottom: 45px;
+    right: 40px;
+}
+
+#footer .copyrights {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+@media screen and (min-width: 1200px) {
+    #homepage #header .slick-slide img {
+        height: 650px;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    
+    body {
+        margin-top: 135px;
+    }
+
+    .navbar-default .navbar-header a.navbar-brand {
+        position: absolute;
+        top: 15px;
+        left: 30px;
+        background: #ddd;
+    }
+    
+    .dropdown:hover {
+        background-color: #e7e7e7;
+    }
+    
+    .dropdown:hover ul.dropdown-menu {
+        display: block;
+    }
+}
+
+@media screen and (max-width:991px) and (min-width:768px) {
+    body {
+        margin-top: 125px;
+    }   
+    
+    .navbar-default ul.navbar-nav li a {
+        font-size: 14px;
+    }
+
+    .navbar-default #mainNavbar ul.navbar-nav li a {
+        padding: 10px 12px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    body {
+        margin-top: 50px;
+    }
+
+    button.slick-next {
+        right: 10px;
+    }
+
+    button.slick-prev {
+        left: 10px;
+    }
+
+    .navbar-default .container-fluid {
+        padding: 0 15px; 
+    }
+
+    .navbar-default .navbar-collapse {
+        padding: 0 30px;
+    }
+
+    .navbar-default #mainNavbar ul.navbar-nav.navbar-right {
+        padding: 0;
+    }
+
+    .navbar-default .dropdown:hover {
+        background-color: #e7e7e7;
+    }
+
+    .navbar-default .dropdown ul.dropdown-menu {
+        position: static;
+        float: none;
+        width: auto;
+        margin-top: 0;
+        background-color: transparent;
+        border: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+
+    .navbar-default .navbar-nav .dropdown-menu>li>a {
+        color: #777;
+    }
+    
+    .navbar-nav .dropdown-menu>li>a {
+        line-height: 20px;
+    }
+
+    .navbar-nav .dropdown-menu .dropdown-header, .navbar-nav .dropdown-menu>li>a {
+        padding: 5px 15px 5px 25px;
+    }
+
+    .navbar-default .navbar-nav .dropdown a:hover {
+        color: #555;
+        background-color: #e7e7e7;
+    }
+
+    .navbar-default .dropdown a:focus + ul.dropdown-menu {
+        display: block;
+    }
+
+    #header button.slick-arrow {
+        height: 45px;
+        width: 45px;
+    }
+    
+    #header button.slick-arrow:before {
+        font-size: 45px;
+    }
+
+    #header .slick-slide .slide-caption {
+        bottom: 0;
+        right: 0;
+    }
+
+    #header .slick-slide .slide-caption h1 {
+        font-size: 20px;
+    }
+
+    #header .slick-slide .slide-caption p {
+        font-size: 14px;
+    }
+
+    .section .heading h1 {
+        margin-top: -36px;
+        font-size: 25px;
+    }
+
+    #homepage .slick-slide img {
+        height: 230px;
+    }
+
+    #footer {
+        padding-bottom: 80px;
+    }
+
+    #footer ul {
+        margin-bottom: 25px;
+    }
+
+    #footer .links {
+        display: block;
+    }
+
+}
+
+

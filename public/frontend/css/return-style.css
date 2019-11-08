@@ -1,0 +1,67 @@
+#return {
+    padding: 40px 0;
+}
+
+#return .return-poster img {
+    width: 100%;
+}
+
+#return .section .heading {
+    margin-top: 50px;
+}
+
+#return .return-desc p {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+#return .return-options {
+    margin: 70px auto;
+}
+
+#return .option {
+    border: solid 1px #ccc;
+    text-align: center;
+    padding: 60px;
+}
+
+#return .option p {
+    min-height: 70px;
+}
+
+#return a.btn {
+    border: solid 1px #bbb;
+    border-radius: 10px;
+    padding: 10px 60px;
+    background: #ccc;
+    color: white;
+    font-size: 16px;
+}
+
+@media screen and (min-width: 992px) {
+
+    #return .option.start {
+        float: left;
+    }
+    
+    #return .option.view {
+        float: right;
+    }
+
+}
+
+@media screen and (max-width: 991px) {
+
+    #return .return-desc {
+        padding: 0 15px;
+    }
+
+    #return .return-options {
+        margin: 50px auto;
+    } 
+
+    #return .option.start {
+        margin-bottom: 25px;
+    }
+
+}

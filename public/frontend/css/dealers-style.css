@@ -1,0 +1,102 @@
+#dealers {
+    padding: 40px 0;
+}
+
+#dealers .dealers-header {
+    margin: 40px auto;
+}
+
+#dealers .dealers-header .desc {
+    font-size: 18px;
+}
+
+#dealers .dealers-header .poster img {
+    width: 100%;
+}
+
+#dealers .download-section {
+    margin: 70px auto;
+}
+
+#dealers .download-section .download-links {
+    text-align: center;
+    display: flex;
+}
+
+#dealers .download-section .download-links a.btn {
+    border: 3px solid #888;
+    border-radius: 15px;
+    padding: 15px;
+    font-size: 20px;
+    color: black;
+    flex-grow: 1;
+    margin: 5px;
+}
+
+#dealers .application .form-group {
+    margin-bottom: 24px;
+}
+
+#dealers .application .form-group:not(.upload-file) input {
+    background: #eee;
+    border-radius: 0;
+    height: 30px;
+}
+
+#dealers .application .form-group.upload-file label {
+    font-size: 16px;
+    font-weight: normal;
+    margin-right: 20px;
+}
+
+#dealers .application .form-group.upload-file input {
+    display: inline;
+}
+
+#dealers .application .captcha {
+    margin: 40px 0;
+}
+
+#dealers .submit-button {
+    text-align: center;
+}
+
+#dealers .submit-button button {
+    background: #ccc;
+    color: black;
+    font-size: 16px;
+    padding: 10px 40px;
+}
+
+@media screen and (max-width: 991px) {
+
+    #dealers .application {
+        padding: 0 20px;
+    }
+    
+
+    #dealers .download-section .download-links a.btn {
+        font-size: 16px;
+    }
+
+}
+
+
+@media screen and (max-width: 767px) {
+
+    #dealers .download-section {
+        margin: 20px auto;
+    }
+
+    #dealers .download-section .download-links {
+        display: block;
+    }   
+    
+    #dealers .download-section .download-links a.btn {
+        width: 100%;
+    }
+
+}
+
+
+

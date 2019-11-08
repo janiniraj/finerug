@@ -1,0 +1,23 @@
+#customized {
+    padding: 40px 0;
+}
+
+#customized .rug {
+    margin-bottom: 80px;
+}
+
+#customized .rug-img {
+    position: relative;
+}
+
+#customized .rug-img img {
+    width: 100%;
+}
+
+#customized .rug-img .rug-caption {
+    position: absolute;
+    bottom: 25px;
+    right: 0;
+    text-decoration: underline;
+    font-size: 28px;
+}

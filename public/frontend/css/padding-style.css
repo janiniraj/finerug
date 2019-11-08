@@ -1,0 +1,52 @@
+#padding {
+    padding: 40px 0;
+}
+
+#padding .padding-poster img {
+    width: 100%;
+}
+
+#padding .section .heading {
+    margin-top: 55px;
+}
+
+#padding .padding-video {
+    text-align: center;
+}
+
+#padding .padding-video video {
+    width: 100%;
+}
+
+#padding .padding-video p {
+    margin: 0 40px;
+    line-height: 1.8;
+    font-size: 18px;
+}
+
+#padding .padding-video hr {
+    border-color: black;
+    margin: 30px 15%;
+}
+
+#padding .padding-types .desc {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+#padding .padding-types .samples-table table, .padding-types .samples-table table th {
+    text-align: center;
+}
+
+@media screen and (max-width: 991px) {
+
+    #padding .padding-types {
+        padding: 0 15px;
+    }
+
+    #padding .padding-types hr {
+        margin: 20px 0 40px;
+        border-color: black;
+    }
+
+}

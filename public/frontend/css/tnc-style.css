@@ -1,0 +1,59 @@
+#tnc {
+    padding: 40px 0;
+}
+
+#tnc .tnc-poster {
+    position: relative;
+}
+
+#tnc .tnc-poster img {
+    width: 100%;
+}
+
+#tnc .tnc-poster .caption {
+    position: absolute;
+    bottom: 18px;
+    width: 100%;
+    text-align: center;
+}
+
+#tnc .tnc-poster .caption span {
+    background: white;
+    padding: 15px 50px;
+    font-size: 32px;
+    font-family: Blacksword;
+}
+
+#tnc .terms {
+    margin: 60px 0;
+}
+
+#tnc .terms p {
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+@media screen and (max-width: 991px) {
+
+    #tnc .terms {
+        margin: 35px 15px;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+    #tnc .tnc-poster .caption {
+        bottom: 7px;
+    }
+
+    #tnc .tnc-poster .caption span {
+        padding: 5px 50px;
+        font-size: 20px;
+
+    }
+
+    #tnc .terms p {
+        font-size: 14px;
+    }
+
+}

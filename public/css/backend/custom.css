@@ -1,0 +1,77 @@
+.imageThumb {
+    max-height: 75px;
+    border: 2px solid;
+    padding: 1px;
+    cursor: pointer;
+}
+.pip {
+    display: inline-block;
+    margin: 10px 10px 0 0;
+}
+.remove {
+    background: #444;
+    border: 1px solid black;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    right: -15px;
+    top: -38px;
+    float: right;
+    padding: 5px 7px 5px 7px;
+}
+.remove:hover {
+    background: white;
+    color: black;
+}
+.padding-top {
+    padding-top: 15px;
+}
+.margin-top {
+    margin-top: 15px;
+}
+.image-display {
+    max-height:75px;
+    margin-bottom: 15px;
+}
+.file-input-cloned {
+    border: 1px solid #d2d6de;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.color-btn {
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    position: relative;
+    -webkit-transition: all ease .1s;
+    transition: all ease .1s;
+    float: left;
+    margin-right: 15px;
+}
+
+
+.mce-branding.mce-widget.mce-label {
+    display: none;
+}
+
+.single-image-display {
+    display: inline-block;
+}
+
+.close-image {
+    padding: 2px 5px;
+    background: #444;
+    color: white;
+    position: relative;
+    right: 24px;
+    top: -37px;
+    cursor: pointer;
+}
+.fa.fa-star.fa-review {
+    color: #d4122e;
+}

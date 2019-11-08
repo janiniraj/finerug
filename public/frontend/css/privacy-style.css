@@ -1,0 +1,26 @@
+#privacy {
+    padding: 40px 0;
+}
+
+#privacy .privacy-poster img {
+    width: 100%;
+}
+
+#privacy .section .heading {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin-top: 55px;
+}
+
+#privacy .privacy-desc {
+    background: #f2f2f2;
+    padding: 1px 15px;
+}
+
+#privacy .privacy-desc h3 {
+    text-decoration: underline;
+}
+
+#privacy .privacy-desc p {
+    line-height: 1.8;
+    font-size: 16px;
+}

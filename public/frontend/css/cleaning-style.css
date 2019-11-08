@@ -1,0 +1,38 @@
+#cleaning {
+    padding: 40px 0;
+}
+
+#cleaning .cleaning-poster img {
+    width: 100%;
+}
+
+#cleaning .section .heading {
+    margin: 55px 0;
+}
+
+#cleaning .samples .sample {
+    margin-bottom: 30px;
+}
+
+#cleaning .samples .sample-img {
+    position: relative;
+}
+
+#cleaning .samples .sample-img img {
+    width: 100%;
+}
+
+#cleaning .samples .sample-img .sample-caption {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 16px;
+    font-style: italic;
+}
+
+@media screen and (min-width: 992px) {
+    
+    #cleaning .samples {
+        margin: 0 50px;
+    }
+}

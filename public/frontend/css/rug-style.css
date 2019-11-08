@@ -1,0 +1,70 @@
+#rug-school {
+    padding: 40px 0;
+    font-size: 16px;
+}
+
+#rug-school .rug-poster img {
+    width: 100%;
+}
+
+#rug-school .section .heading {
+    margin: 55px 0 25px;
+}
+
+#rug-school .rug-school-desc {
+    line-height: 1.8;
+}
+
+#rug-school .rug-school-schedule {
+    margin: 40px 0;
+}
+
+#rug-school .rug-school-schedule table {
+    float: none;
+    margin: auto;
+}
+
+#rug-school .rug-school-schedule table th {
+    font-family: Blacksword;
+    font-size: 20px;
+}
+
+#rug-school .rug-school-schedule table td, #rug-school .rug-school-schedule table th {
+    border: 2px solid #000;
+    text-align: left;
+    padding: 8px;
+    width: 25%;
+}
+
+#rug-school .download-link {
+    text-align: center;
+}
+
+#rug-school .download-link a.btn {
+    padding: 15px 50px;
+    border: 3px solid #888;
+    border-radius: 15px;
+    font-size: 20px;
+    color:black;
+}
+
+
+#rug-school .rug-school-download {
+    margin: 70px 0;
+}
+
+@media screen and (max-width: 767px) {
+    #rug-school .download-link {
+        margin-bottom: 20px;
+        padding: 0;
+    }
+
+    #rug-school .download-link a.btn {
+        padding: 15px 0;
+        width: 100%;
+    }
+
+    #rug-school .rug-school-download {
+        margin: 50px 0;
+    }
+}

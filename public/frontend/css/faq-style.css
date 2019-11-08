@@ -1,0 +1,81 @@
+#faq {
+    padding: 40px 0;
+}
+
+#faq .faq-poster img {
+    width: 100%;
+}
+
+#faq .links {
+    display: flex;
+    margin: 50px 0;
+}
+
+#faq .links a {
+    display: inline-block;
+    margin-right: 20px;
+    padding: 20px;
+    background: #ddd;
+    text-decoration: none;
+    color: black;
+    flex-grow: 1;
+    text-align: center;
+    font-size: 16px;
+    user-select: none;
+}
+
+#faq .links a:hover {
+    background: #b1b1b1;
+}
+
+#faq .links a:last-child {
+    margin: 0;
+}
+
+#faq #faq-accordion {
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+#faq #faq-accordion .panel {
+    margin-bottom: 15px;
+}
+
+#faq #faq-accordion .panel:last-child {
+    margin-bottom: 0;
+}
+
+#faq #faq-accordion .panel .panel-heading a.accordion-toggle {
+    display: block;
+    padding: 10px 30px 10px 15px;
+}
+
+#faq #faq-accordion .panel .panel-heading {
+    position: relative;
+    padding: 0;
+    background-color: white;
+}
+
+#faq .panel-heading .accordion-toggle:after {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    font-family: 'Glyphicons Halflings';  
+    content: "\e114";           
+    color: grey;         
+}
+
+
+
+@media screen and (max-width: 767px) {
+    #faq .links {
+        display: block;
+        margin: 30px 0;
+    }
+
+    #faq .links a {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+}

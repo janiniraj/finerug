@@ -1,0 +1,190 @@
+#results-page {
+    padding: 40px 0;
+}
+
+#results-page .results-limit {
+    margin-bottom: 55px;
+}
+
+#results-page .results-limit select {
+    border: solid 2px black;
+    padding: 5px 10px;
+    outline: none;
+    float: right;
+    font-size: 16px;
+}
+
+#results-page .filters ul.filters-list {
+    margin-bottom: 0;
+    list-style: none;
+    padding: 0;
+}
+
+#results-page .filters ul.filters-list li {
+    border-bottom: solid 1px black;
+    font-size: 18px;
+    font-style: italic;
+}
+
+#results-page .filters ul.filters-list li a {
+    display: block;
+    padding: 20px 0;
+    color: black;
+}
+
+#results-page .filters ul.filters-list li.list-header {
+    font-family: Blacksword;
+    font-size: 26px;
+    padding: 5px 0;
+    font-style: normal;
+}
+
+
+#results-page .filters .panel-default {
+    border: none;
+    box-shadow: none;
+    border-bottom: solid 1px black;
+    border-radius: 0;
+}
+
+#results-page .filters .panel-heading {
+    padding: 0;
+    background: white;
+}
+
+
+#results-page .filters .panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e260";    /* adjust as needed, taken from bootstrap.css */
+    float: right;        /* adjust as needed */
+    color: grey;         /* adjust as needed */
+}
+#results-page .filters .panel-heading .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\e259";    /* adjust as needed, taken from bootstrap.css */
+}
+
+#results-page .filters .panel-heading a {
+    font-size: 18px;
+    padding: 20px 0;
+    display: block;
+}
+
+#results-page .panel-body {
+    padding: 0;
+    border-top: none;
+}
+
+#results-page .filters .panel-body ul.sub-filters {
+    margin-left: 50px;
+    margin-bottom: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+
+#results-page .filters .panel-body ul.sub-filters li {
+    border-bottom: none;
+}
+
+#results-page .filters .panel-body ul.sub-filters li a {
+    font-size: 16px;
+    padding: 5px 0;
+    display: block;
+    color: black;
+}
+
+#results-page .filters .panel-body .dropdown-colorselector {
+    margin-left: 10px;
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+#results-page .filters .panel-body .dropdown.dropdown-colorselector:hover {
+    background: none;
+}
+
+#results-page .filters .panel-body .dimensions label {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+#results-page .filters .panel-body .dimensions .checkbox {
+    float: right;
+    margin: 0;
+}
+
+#results-page .filters .panel-body .dimensions .form-group {
+    height: 40px;
+}
+
+#results-page .filters .panel-body .dimensions .form-group input#max {
+    float: right;
+}
+
+#results-page .filters .panel-body .dimensions .form-group input {
+    width: 90px;
+    margin: 10px 0;
+    border-radius: 0;
+}
+
+#results-page .filters .panel-body .dimensions .form-group input#min {
+    float: left;
+}
+
+#results-page .resutls .items .item {
+    margin-bottom: 30px;
+}
+
+#results-page .resutls .items .item img {
+    width: 100%;
+}
+
+#results-page .resutls .pagination {
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+}
+
+#results-page .resutls .pagination>li>a {
+    position: relative;
+    border-radius: 50% !important;
+    margin: 0 5px;
+    padding: 10px 20px;
+    background: #e7e7e7;
+    color: black;
+    border: none;
+    float: none;
+}
+
+#results-page .resutls .pagination>li>a span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#results-page .resutls .pagination>li.etc {
+    margin-left: 10px;
+    letter-spacing: 5px;
+}
+
+@media screen and (max-width: 767px) {
+    #results-page .section {
+        padding: 0 15px;
+    }
+
+    #results-page .resutls {
+        padding: 0 22px;
+    }
+
+    #results-page .resutls .items .item {
+        margin-bottom: 15px;
+        padding: 0 7px;
+    }
+
+    #results-page .resutls .pagination>li>a {
+        padding: 8px 18px;
+    }
+}

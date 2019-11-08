@@ -1,0 +1,42 @@
+#awards {
+    padding: 40px 0;
+}
+
+#awards .award-img {
+    position: relative;
+}
+
+#awards .award-img img {
+    width: 100%;
+}
+
+#awards .award-img .award-caption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: right;
+    padding: 20px;
+    font-size: 20px;
+    font-family: Blacksword;
+}
+
+#awards .award.top .award-desc {
+    font-size: 20px;
+    text-align: center;
+}
+
+#awards .award-desc {
+    margin: 35px 0 50px;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+@media screen and (min-width: 992px) {
+    #awards .award.top {
+        margin: 40px 0 80px;
+    }
+
+    #awards .award.top .award-img {
+        margin: 0 40px;
+    }
+}

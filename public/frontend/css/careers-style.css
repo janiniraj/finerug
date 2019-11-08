@@ -1,0 +1,37 @@
+#careers {
+    padding: 40px 0;
+}
+
+#careers .careers-poster img {
+    width: 100%;
+}
+
+#careers .section .heading {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin-top: 50px;
+}
+
+#careers .careers-opportunities hr {
+    border-color: black;
+    border-style: dashed;
+}
+
+#careers .careers-opportunities .career {
+    padding: 20px 0;
+    font-size: 16px;
+}
+
+#careers .careers-opportunities .career .career-desc p {
+    margin-bottom: 30px;
+}
+
+#careers .careers-opportunities .career .career-desc a.career-link {
+    color: black;
+    text-decoration: underline;
+}
+
+@media screen and (min-width: 768px) {
+    #careers .careers-opportunities .career {
+        padding: 20px 40px;
+    }
+}
