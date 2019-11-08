@@ -27,3 +27,4 @@ phpunit.txt
 /public/product_uploaded_sheets
 /public/stores/
 /storage
+/public/.htaccess
