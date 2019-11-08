@@ -26,3 +26,4 @@ phpunit.txt
 /public/filemanager
 /public/product_uploaded_sheets
 /public/stores/
+/storage
