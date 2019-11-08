@@ -51,7 +51,7 @@ $cartCount = Cart::getTotalQuantity();
                         </ul>	
                     </div>
                 </div>
-                <div class="logo"><a href="#"><img src="settings/logo.jpg"  alt=""/></a></div> 
+                <div class="logo"><a href="{{ URL::to('/') }}"><img src="{{ URL::to('/') }}/settings/logo.jpg"  alt=""/></a></div>
             </div>
         </div>
     </div>
