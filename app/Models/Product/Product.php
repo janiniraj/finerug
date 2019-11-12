@@ -61,7 +61,9 @@ class Product extends Model
         'msrp',
         'is_stock',
         'weight',
-        'generalsize'
+        'generalsize',
+        'meta_keywords',
+        'meta_description'
         ];
 
     /**

@@ -255,6 +255,21 @@
                 </div><!--col-lg-10-->
             </div><!--form control-->
             <div class="form-group">
+                {{ Form::label('meta_keywords', 'Meta Keywords', ['class' => 'col-lg-2 control-label']) }}
+
+                <div class="col-lg-10">
+                    {{ Form::textarea('meta_keywords', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Meta Keywords', 'rows' => 3]) }}
+                </div><!--col-lg-10-->
+            </div><!--form control-->
+            <div class="form-group">
+                {{ Form::label('meta_description', 'Meta Description', ['class' => 'col-lg-2 control-label']) }}
+
+                <div class="col-lg-10">
+                    {{ Form::textarea('meta_description', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Meta Description', 'rows' => 3]) }}
+                </div><!--col-lg-10-->
+            </div><!--form control-->
+
+            <div class="form-group">
                 {{ Form::label('amazon_link', 'Amazon Link', ['class' => 'col-lg-2 control-label']) }}
 
                 <div class="col-lg-10">

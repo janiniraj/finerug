@@ -177,6 +177,8 @@ class ProductRepository extends BaseRepository
             $product->msrp				= $input['msrp_main'];
             $product->weight            = $input['weight'];
             $product->detail            = $input['detail'];
+            $product->meta_keywords     = $input['meta_keywords'];
+            $product->meta_description  = $input['meta_description'];
             $product->type              = $input['type'];
             $product->country_origin    = isset($input['country_origin']) ? $input['country_origin'] : '';
 
@@ -383,6 +385,16 @@ class ProductRepository extends BaseRepository
         if(isset($input['detail']))
         {
             $product->detail = $input['detail'];
+        }
+
+        if(isset($input['meta_keywords']))
+        {
+            $product->meta_keywords = $input['meta_keywords'];
+        }
+
+        if(isset($input['meta_description']))
+        {
+            $product->meta_description = $input['meta_description'];
         }
 
         if(isset($input['shop']))

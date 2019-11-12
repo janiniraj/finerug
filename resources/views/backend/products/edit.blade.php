@@ -337,6 +337,20 @@
                         {{ Form::textarea('detail', $product->detail, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Product Detail', 'rows' => 3]) }}
                     </div><!--col-lg-10-->
                 </div><!--form control-->
+                <div class="form-group">
+                    {{ Form::label('meta_keywords', 'Meta Keywords', ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-10">
+                        {{ Form::textarea('meta_keywords', $product->meta_keywords, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Meta Keywords', 'rows' => 3]) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
+                <div class="form-group">
+                    {{ Form::label('meta_description', 'Meta Description', ['class' => 'col-lg-2 control-label']) }}
+
+                    <div class="col-lg-10">
+                        {{ Form::textarea('meta_description', $product->meta_description, ['class' => 'form-control', 'required' => 'required', 'placeholder' => 'Meta Description', 'rows' => 3]) }}
+                    </div><!--col-lg-10-->
+                </div><!--form control-->
                 @php
                     $shop = json_decode($product->shop, true);
                 @endphp

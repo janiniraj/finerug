@@ -1,4 +1,8 @@
 @extends('frontend.layouts.master')
+@section('meta')
+<meta name="keywords" content="{{ $product->meta_keywords }}" />
+<meta name="description" content="{{ $product->meta_description }}" />
+@endsection
 @section('content')
 
     <section class="py-5">
