@@ -151,13 +151,13 @@
                                     </div>
 
                                 </div>
-                                
+
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
                                         <h4 class="panel-title">
                                             <div style="text-align: center; width:100%;">
-                                                
-                                                <a style="width:100%;color: #fff;" class=" btn btn-success billing-submit">Continue to Shipping Information»</a>   
+
+                                                <a style="width:100%;color: #fff;" class=" btn btn-success billing-submit">Continue to Shipping Information»</a>
                                             </div>
                                         </h4>
                                     </div>
@@ -415,7 +415,7 @@
                                     <div id="collapseThree" class="panel-collapse collapse">
                                         <div class="panel-body">
                                             <span class='payment-errors'></span>
-                                            
+
                                             <a href="{{ route('frontend.checkout.before-payment') }}" type="submit" class="btn btn-success btn-lg before-payment" style="width:100%;">Pay
                                             </a>
                                             <br/>
