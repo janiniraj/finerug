@@ -20,7 +20,7 @@
                                     </div>
                                     <div id="collapseOne" class="panel-collapse collapse in">
                                         <div class="panel-body">
-                                        {{ Form::open(['route' => 'frontend.checkout.add_user_address', 'id' => 'user_billing', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
+                                            {{ Form::open(['route' => 'frontend.checkout.add_guest_address', 'id' => 'user_billing', 'class' => 'form-horizontal', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
 
                                             {{ Form::hidden('user_id', Auth::user()->id) }}
                                             {{ Form::hidden('type', 'billing') }}

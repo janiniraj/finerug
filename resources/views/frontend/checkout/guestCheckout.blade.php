@@ -65,8 +65,9 @@
                 </form>*/ ?>
             </div>
             <div class="col-md-8 order-md-1">
-                <h4 class="mb-3">Billing address</h4>
-                <form id="billing" class="needs-validation" novalidate>
+                {{ Form::open(['route' => 'frontend.checkout.add_guest_address', 'id' => 'user_shipping', 'class' => 'form-horizontal needs-validation', 'role' => 'form', 'method' => 'post', 'files' => true, 'novalidate' => true]) }}
+                    <h4 class="mb-3">Shipping address</h4>
+                    {{ Form::hidden('type', 'shipping') }}
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="firstName">First name</label>
@@ -86,7 +87,7 @@
 
                     <div class="mb-3">
                         <label for="email">Email <span class="text-muted">(Required)</span></label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com">
+                        <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com" required>
                         <div class="invalid-feedback">
                             Please enter a valid email address for shipping updates.
                         </div>
@@ -176,11 +177,18 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="zip">Zip</label>
-                            <input type="text" name="postal_code" class="form-control" id="zip" placeholder="" required>
+                            <label for="city">City</label>
+                            <input type="text" name="city" class="form-control" id="city" placeholder="" required>
                             <div class="invalid-feedback">
-                                Zip code required.
+                                City is required.
                             </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="zip">Zip</label>
+                        <input type="text" name="postal_code" class="form-control" id="zip" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Zip code required.
                         </div>
                     </div>
                     <div class="mb-3">
@@ -190,7 +198,8 @@
                             Phone Number required.
                         </div>
                     </div>
-                </form>
+                    <button id="shipping_submit" class="btn btn-primary btn-lg btn-block" type="submit" style="margin-bottom: 3rem !important;">Proceed Next</button>
+                {{ Form::close() }}
 
 
 
@@ -198,7 +207,7 @@
                 <hr class="mb-4">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" checked class="custom-control-input" id="same-address">
-                    <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+                    <label class="custom-control-label" for="same-address">Billing address is the same as my Shipping address</label>
                 </div>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="save-info">
@@ -206,18 +215,20 @@
                 </div>
                 <hr class="mb-4">
 
-                <form id="shipping" class="needs-validation hidden" novalidate>
+                {{ Form::open(['route' => 'frontend.checkout.add_guest_address', 'id' => 'user_billing', 'class' => 'form-horizontal needs-validation hidden', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
+                    <h4 class="mb-3">Billing address</h4>
+                    {{ Form::hidden('type', 'billing') }}
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="firstName">First name</label>
-                            <input type="text" name="first_name" class="form-control" id="firstName" placeholder="First Name" required>
+                            <input type="text" name="first_name" class="form-control" id="billing_firstName" placeholder="First Name" required>
                             <div class="invalid-feedback">
                                 Valid first name is required.
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="lastName">Last name</label>
-                            <input type="text" name="last_name" class="form-control" id="lastName" placeholder="Last Name" required>
+                            <input type="text" name="last_name" class="form-control" id="billing_lastName" placeholder="Last Name" required>
                             <div class="invalid-feedback">
                                 Valid last name is required.
                             </div>
@@ -226,7 +237,7 @@
 
                     <div class="mb-3">
                         <label for="email">Email <span class="text-muted">(Required)</span></label>
-                        <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com">
+                        <input type="email" name="email" class="form-control" id="billing_email" placeholder="you@example.com">
                         <div class="invalid-feedback">
                             Please enter a valid email address for shipping updates.
                         </div>
@@ -234,7 +245,7 @@
 
                     <div class="mb-3">
                         <label for="address">Address</label>
-                        <input type="text" name="address" class="form-control" id="address" placeholder="1234 Main St" required>
+                        <input type="text" name="address" class="form-control" id="billing_address" placeholder="1234 Main St" required>
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
@@ -242,13 +253,13 @@
 
                     <div class="mb-3">
                         <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                        <input type="text" name="street" class="form-control" id="address2" placeholder="Apartment or suite">
+                        <input type="text" name="street" class="form-control" id="billing_address2" placeholder="Apartment or suite">
                     </div>
 
                     <div class="row">
                         <div class="col-md-5 mb-3">
                             <label for="country">Country</label>
-                            <select name="country" class="custom-select d-block w-100" id="country" required>
+                            <select name="country" class="custom-select d-block w-100" id="billing_country" required>
                                 <option value="US" selected>United States</option>
                             </select>
                             <div class="invalid-feedback">
@@ -257,7 +268,7 @@
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="state">State</label>
-                            <select name="state" class="custom-select d-block w-100" id="state" required>
+                            <select name="state" class="custom-select d-block w-100" id="billing_state" required>
                                 <option value="">Choose...</option>
                                 <option value="AK">Alaska</option>
                                 <option value="AL">Alabama</option>
@@ -316,26 +327,34 @@
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
-                            <label for="zip">Zip</label>
-                            <input type="text" name="postal_code" class="form-control" id="zip" placeholder="" required>
+                            <label for="city">City</label>
+                            <input type="text" name="city" class="form-control" id="billing_city" placeholder="" required>
                             <div class="invalid-feedback">
-                                Zip code required.
+                                City is required.
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label for="zip">Zip</label>
+                        <input type="text" name="postal_code" class="form-control" id="billing_zip" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Zip code required.
+                        </div>
+                    </div>
+                    <div class="mb-3">
                         <label for="phone">Phone</label>
-                        <input type="text" name="phone" class="form-control" id="phone" placeholder="" required>
+                        <input type="text" name="phone" class="form-control" id="billing_phone" placeholder="" required>
                         <div class="invalid-feedback">
                             Phone Number required.
                         </div>
                     </div>
 
                     <hr class="mb-4">
-                </form>
+                {{ Form::close() }}
 
-                <h4 class="mb-3">Payment</h4>
-                <form id="payment" class="needs-validation" novalidate>
+
+                <form id="payment" class="needs-validation hidden" novalidate>
+                    <h4 class="mb-3">Payment</h4>
                     <div class="d-block my-3">
                         <div class="custom-control custom-radio">
                             <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
@@ -393,6 +412,7 @@
 @endsection
 
 @section('after-scripts')
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script>
     $(document).ready(function(){
 
@@ -406,7 +426,69 @@
                 $("#shipping").removeClass("hidden");
             }
         });
-		$('#accordion .in').collapse('show');
+        $("#user_shipping").validate({
+            ignore: ":hidden",
+            rules: {
+                first_name: {
+                    required: true,
+                    minlength: 3
+                },
+                last_name: {
+                    required: true,
+                    minlength: 3
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                address: {
+                    required: true,
+                    minlength: 3
+                },
+                country: {
+                    required: true
+                },
+                state: {
+                    required: true
+                },
+                city: {
+                    required: true,
+                    minlength: 3
+                },
+                postal_code: {
+                    required: true,
+                    number: true
+                },
+                phone: {
+                    required: true,
+                    number: true
+                }
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    url:      $("#user_shipping").attr('action'),
+                    type:     $("#user_shipping").attr('method'),
+                    data:     $("#user_shipping").serialize(),
+                    success: function(data) {
+                        //console.log(data.rates);
+                        if(data.rates)
+                        {
+                            alert("Shipping Charges Added: $"+data.rates);
+                            $("form#payment").fadeIn();
+                            if($("#same-address").is(':checked'))
+                            {
+                                alert("write code for copy address");
+                            }
+                        }
+                        else
+                        {
+                            alert("Error in Address.");
+                        }
+                    }
+                });
+            }
+        });
+
         $("#user_billing").submit(function(e){
             e.preventDefault();
             $.ajax({
@@ -422,7 +504,7 @@
             });
         });
 
-        $("#user_shipping").submit(function(e){
+        /*$("#user_shipping").submit(function(e){
             e.preventDefault();
             $.ajax({
                 url:      $(this).attr('action'),
@@ -444,17 +526,17 @@
                     }
                 }
             });
-        });
+        });*/
 
         $(".billing-submit").on("click", function(){
             $("#user_billing").submit();
         });
 
-        $(".shipping-submit").on("click", function(){
+        /*$(".shipping-submit").on("click", function(){
             $("#user_shipping").submit();
             //$(this).fadeOut();
             //$('#payInfo').fadeIn();
-        });
+        });*/
 
         $("#overview_div").on("click", function(){
             $('#accordion .in').collapse('hide');
