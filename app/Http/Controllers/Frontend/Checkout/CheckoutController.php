@@ -449,8 +449,186 @@ class CheckoutController extends Controller
 
         return response()->json(true);
     }
+
+    public function AddGuestAddress(Request $request)
+    {
+        $postData = $request->all();
+
+        $model = new UserAddress();
+        $model->type = $postData['type'];
+        $model->email = $postData['email'] ? $postData['email'] : 'dsdsdsds@sdds.com';
+        $model->first_name = $postData['first_name'];
+        $model->last_name = $postData['last_name'];
+        $model->address = $postData['address'];
+        $model->street = $postData['street'];
+        $model->city = $postData['city'];
+        $model->state = $postData['state'];
+        $model->postal_code = $postData['postal_code'];
+        $model->phone = $postData['phone'];
+        $model->country = 'USA';
+
+        $model->save();
+
+        if($postData['type'] == 'shipping')
+        {
+            $address = new \Ups\Entity\Address();
+            $address->setStateProvinceCode($postData['state']);
+            $address->setCity($postData['city']);
+            $address->setCountryCode('US');
+            $address->setPostalCode($postData['postal_code']);
+
+            $av = new \Ups\SimpleAddressValidation(env('UPS_ACCESS_KEY'), env('UPS_USERID'), env('UPS_PASSWORD'));
+            try {
+                $response = $av->validate($address);
+                var_dump($response);
+            } catch (Exception $e) {
+                var_dump($e);
+            }
+die("here");
+            $rate = new \Ups\Rate(
+                env('UPS_ACCESS_KEY'),
+                env('UPS_USERID'),
+                env('UPS_PASSWORD')
+            );
+
+            try {
+                $shipment = new \Ups\Entity\Shipment();
+
+                $shipperAddress = $shipment->getShipper()->getAddress();
+                $shipperAddress->setPostalCode('20005');
+
+                $address = new \Ups\Entity\Address();
+                $address->setPostalCode('20005');
+                $shipFrom = new \Ups\Entity\ShipFrom();
+                $shipFrom->setAddress($address);
+
+                $shipment->setShipFrom($shipFrom);
+
+                $shipTo = $shipment->getShipTo();
+                $shipTo->setCompanyName('Test Ship To');
+                $shipToAddress = $shipTo->getAddress();
+                $shipToAddress->setPostalCode('20005');
+
+                $package = new \Ups\Entity\Package();
+                $package->getPackagingType()->setCode(\Ups\Entity\PackagingType::PT_PACKAGE);
+                $package->getPackageWeight()->setWeight(10);
+
+                // if you need this (depends of the shipper country)
+                /*$weightUnit = new \Ups\Entity\UnitOfMeasurement;
+                $weightUnit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_KGS);
+                $package->getPackageWeight()->setUnitOfMeasurement($weightUnit);*/
+
+                $dimensions = new \Ups\Entity\Dimensions();
+                $dimensions->setHeight(10);
+                $dimensions->setWidth(10);
+                $dimensions->setLength(10);
+
+                $unit = new \Ups\Entity\UnitOfMeasurement;
+                $unit->setCode(\Ups\Entity\UnitOfMeasurement::UOM_IN);
+
+                $dimensions->setUnitOfMeasurement($unit);
+                $package->setDimensions($dimensions);
+
+                $shipment->addPackage($package);
+
+                $rates = $rate->getRate($shipment);
+                if(isset($rates->RatedShipment) && isset($rates->RatedShipment[0]))
+                {
+                    $passRates = $rates->RatedShipment[0]->TotalCharges->MonetaryValue;
+                }
+
+                if(Session::has('cartSessionId'))
+                {
+                    $cartId = Session::get('cartSessionId');
+                }
+                else
+                {
+                    $cartId = rand(0,9999);
+                    session(['cartSessionId' => $cartId]);
+                }
+
+                $cartData = Cart::session($cartId);
+
+                $checkCartCondition = $cartData->getConditionsByType('coupon');
+
+                if($checkCartCondition->count() > 0)
+                {
+                    foreach ($checkCartCondition as $key => $value)
+                    {
+                        $cartData->removeCartCondition($key);
+                    }
+                }
+
+                // Tax Start
+                try
+                {
+                    //Calculate Taxes
+                    $client = \TaxJar\Client::withApiKey(env('TAXJAR_API_KEY'));
+
+                    $order_taxes = $client->taxForOrder([
+                        'from_country'    => 'US',
+                        'from_zip'        => '20036',
+                        'from_state'      => 'DC',
+                        'to_country'      => 'US',
+                        'to_zip'          => $postData['postal_code'],
+                        'to_state'        => $postData['state'],
+                        'amount'          => $cartData->getSubTotal(),
+                        'shipping'        => $passRates
+                    ]);
+
+                    if(isset($order_taxes->amount_to_collect))
+                    {
+                        $tax = $order_taxes->amount_to_collect;
+
+                        $condition = new CartCondition(array(
+                            'name' => 'tax',
+                            'type' => 'coupon',
+                            'target' => 'total',
+                            'value' => '+'.$tax,
+                            'attributes' => array()
+                        ));
+
+                        Cart::session($cartId)->condition($condition);
+                    }
+                    else
+                    {
+                        return response()->json([
+                            'error' => "Error in State and Zipcode validation."
+                        ]);
+                    }
+                }
+                catch(Exception $e)
+                {
+                    return response()->json([
+                        'error' => "Error in State and Zipcode validation."
+                    ]);
+                }
+                // Tax End
+
+                $condition = new CartCondition(array(
+                    'name' => 'shipping',
+                    'type' => 'coupon',
+                    'target' => 'total',
+                    'value' => '+'.$passRates,
+                    'attributes' => array()
+                ));
+
+                Cart::session($cartId)->condition($condition);
+
+                return response()->json([
+                    'rates' => $passRates
+                ]);
+            } catch (Exception $e) {
+                return response()->json([
+                    'error' => $e
+                ]);
+            }
+        }
+
+        return response()->json(true);
+    }
 	
-	public function AddGuestAddress(Request $request)
+	public function AddGuestAddress1(Request $request)
     {
         $postData = $request->all();
 
