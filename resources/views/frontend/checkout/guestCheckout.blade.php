@@ -48,10 +48,17 @@
                             <span class="text-success">-${{$promoCodeDetails->getValue() }}</span>
                         </li>
                     @endif
-
-                    <li class="list-group-item d-flex justify-content-between">
+                    <li class="tax-container list-group-item d-flex justify-content-between hidden">
+                        <span>Tax</span>
+                        <strong class="total">$0.00</strong>
+                    </li>
+                    <li class="shipping-fee-container list-group-item d-flex justify-content-between hidden">
+                        <span>Shipping Fee</span>
+                        <strong class="total">$0.00</strong>
+                    </li>
+                    <li class="subtotal-container list-group-item d-flex justify-content-between">
                         <span>Total (USD)</span>
-                        <strong>${{ $cartData->getSubTotal() }}</strong>
+                        <strong class="total">${{ $cartData->getSubTotal() }}</strong>
                     </li>
                 </ul>
 
@@ -209,11 +216,10 @@
                     <input type="checkbox" checked class="custom-control-input" id="same-address">
                     <label class="custom-control-label" for="same-address">Billing address is the same as my Shipping address</label>
                 </div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="save-info">
-                    <label class="custom-control-label" for="save-info">Save this information for next time</label>
-                </div>
                 <hr class="mb-4">
+
+
+                
 
                 {{ Form::open(['route' => 'frontend.checkout.add_guest_address', 'id' => 'user_billing', 'class' => 'form-horizontal needs-validation hidden', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
                     <h4 class="mb-3">Billing address</h4>
@@ -349,27 +355,29 @@
                         </div>
                     </div>
 
+                    <button id="billing_submit" class="btn btn-primary btn-lg btn-block" type="submit" style="margin-bottom: 3rem !important;">Proceed Next</button>
+
                     <hr class="mb-4">
                 {{ Form::close() }}
 
 
-                <form id="payment" class="needs-validation hidden" novalidate>
+                {{ Form::open(['route' => 'frontend.checkout.before-payment', 'id' => 'user_payment', 'class' => 'form-horizontal needs-validation', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
                     <h4 class="mb-3">Payment</h4>
                     <div class="d-block my-3">
                         <div class="custom-control custom-radio">
-                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input payment-type" value="credit" checked required>
                             <label class="custom-control-label" for="credit">Credit card</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
+                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input payment-type" value="debit" required>
                             <label class="custom-control-label" for="debit">Debit card</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input payment-type" value="paypal" required>
                             <label class="custom-control-label" for="paypal">Paypal</label>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row card-details-container">
                         <div class="col-md-6 mb-3">
                             <label for="cc-name">Name on card</label>
                             <input type="text" class="form-control" id="cc-name" placeholder="" required>
@@ -385,8 +393,7 @@
                                 Credit card number is required
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
+
                         <div class="col-md-3 mb-3">
                             <label for="cc-expiration">Expiration</label>
                             <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
@@ -401,10 +408,18 @@
                                 Security code required
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-bottom: 7rem !important;">Proceed to Payment</button>
+                        </div>
+                    </div>
+                    <div class="row paypal-container" style="display: none;">
+                        <div class="col-md-12">
+                            <a href="{{ route('frontend.checkout.before-payment') }}" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 7rem !important;">Proceed to Paypal</a>
+                        </div>
                     </div>
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit" style="margin-bottom: 7rem !important;">Proceed to Payment</button>
-                </form>
+
+                {{ Form::close() }}
 
             </div>
         </div>
@@ -415,17 +430,51 @@
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <script>
     $(document).ready(function(){
+        $("#user_payment").fadeOut();
 
         $("#same-address").on("change", function (e) {
             if($(this).is(':checked'))
             {
-                $("#shipping").addClass("hidden");
+                $("#user_billing").addClass("hidden");
             }
             else
             {
-                $("#shipping").removeClass("hidden");
+                $("#user_billing").removeClass("hidden");
             }
         });
+
+        $(".payment-type").on("change", function(){
+            if($(this).val() == 'paypal')
+            {
+                $(".card-details-container").fadeOut("slow");
+                $(".paypal-container").fadeIn("slow");
+            }
+            else
+            {
+                $(".paypal-container").fadeOut("slow");
+                $(".card-details-container").fadeIn("slow");
+            }
+        });
+
+        function copySameData()
+        {
+            $("#user_shipping input, #user_shipping select").each(function(){
+                if($(this).attr('type') != "hidden")
+                {
+                    var inputName = $(this).attr('name');
+                    var inputVal = $(this).val();
+
+                    $("#user_billing input, #user_billing select").filter(':visible').each(function(){
+
+                        if($(this).attr('name') == inputName)
+                        {
+                            $(this).val(inputVal);
+                        }
+                    });
+                }
+            });
+        }
+
         $("#user_shipping").validate({
             ignore: ":hidden",
             rules: {
@@ -474,142 +523,76 @@
                         if(data.rates)
                         {
                             alert("Shipping Charges Added: $"+data.rates);
-                            $("form#payment").fadeIn();
+                            $("#user_payment").fadeIn("slow");
                             if($("#same-address").is(':checked'))
                             {
-                                alert("write code for copy address");
+                                copySameData();
+                                $("#billing_submit").trigger('click');
                             }
+                            $(".tax-container strong").text("$"+data.tax);
+                            $(".shipping-fee-container strong").text("$"+data.rates);
+                            $(".subtotal-container strong").text("$"+data.subtotal);
                         }
                         else
                         {
-                            alert("Error in Address.");
+                            alert(data.error);
                         }
+                    },
+                    error: function () {
+                        alert("Error in Validating Address");
                     }
                 });
             }
         });
 
-        $("#user_billing").submit(function(e){
-            e.preventDefault();
-            $.ajax({
-                url:      $(this).attr('action'),
-                type:     $(this).attr('method'),
-                data:     $(this).serialize(),
-                success: function(data) {
-                    $('#accordion .in').collapse('hide');
-                    $(".billing-submit").fadeOut();
-                    $('#collapseTwo').collapse('show');
-                    $(".shipping-submit").fadeIn();
+        $("#user_billing").validate({
+            ignore: ":hidden",
+            rules: {
+                first_name: {
+                    required: true,
+                    minlength: 3
+                },
+                last_name: {
+                    required: true,
+                    minlength: 3
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                address: {
+                    required: true,
+                    minlength: 3
+                },
+                country: {
+                    required: true
+                },
+                state: {
+                    required: true
+                },
+                city: {
+                    required: true,
+                    minlength: 3
+                },
+                postal_code: {
+                    required: true,
+                    number: true
+                },
+                phone: {
+                    required: true,
+                    number: true
                 }
-            });
-        });
+            },
+            submitHandler: function (form) {
+                $.ajax({
+                    url:      $("#user_billing").attr('action'),
+                    type:     $("#user_billing").attr('method'),
+                    data:     $("#user_billing").serialize(),
+                    success: function(data) {
 
-        /*$("#user_shipping").submit(function(e){
-            e.preventDefault();
-            $.ajax({
-                url:      $(this).attr('action'),
-                type:     $(this).attr('method'),
-                data:     $(this).serialize(),
-                success: function(data) {
-					//console.log(data.rates);
-                    if(data.rates)
-                    {
-                        alert("Shipping Charges Added: $"+data.rates);
-
-                        $('#accordion .in').collapse('hide');
-                        $(".shipping-submit").fadeOut();
-                        $('#collapseOverview').collapse('show');
-                    }
-                    else
-                    {
-                        alert("Error in Address.");
-                    }
-                }
-            });
-        });*/
-
-        $(".billing-submit").on("click", function(){
-            $("#user_billing").submit();
-        });
-
-        /*$(".shipping-submit").on("click", function(){
-            $("#user_shipping").submit();
-            //$(this).fadeOut();
-            //$('#payInfo').fadeIn();
-        });*/
-
-        $("#overview_div").on("click", function(){
-            $('#accordion .in').collapse('hide');
-            $('#collapseOverview').collapse('show');
-        });
-
-        $('#collapseOverview').on('show.bs.collapse', function (e) {
-            $.ajax({
-                url:      '<?php echo route("frontend.checkout.overview"); ?>',
-                type:     'GET',
-                success: function(data) {
-                     $('#collapseOverview').html(data);
-                }
-            });
-        });
-
-        $(".before-payment").on("click", function(e){
-            e.preventDefault();
-
-            var billingBlankField = false;
-            $("#user_billing input").each(function(){
-                if($(this).val() == "")
-                {
-                    billingBlankField = true;
-                }
-            });
-
-            var shippingBlankField = false;
-            $("#user_shipping input").each(function(){
-                if($(this).val() == "")
-                {
-                    shippingBlankField = true;
-                }
-            });
-
-            if(billingBlankField == true)
-            {
-                alert("Fields in Billing Address are must to fill.");
-                $('#accordion .in').collapse('hide');
-                $('#collapseOne').collapse('show');
-                $(".billing-submit").fadeIn();
-            }
-            else if(shippingBlankField == true)
-            {
-                alert("Fields in Shipping Address are must to fill.");
-                $('#accordion .in').collapse('hide');
-                $(".billing-submit").fadeOut();
-                $('#collapseTwo').collapse('show');
-                $(".shipping-submit").fadeIn();
-            }
-            else
-            {
-                window.location.replace($(this).attr('href'));
-            }
-        });
-
-        $(".same-as-billing").on("change", function(){
-
-            if($(this).is(':checked')) {
-
-                $("#user_billing input, #user_billing select").each(function(){
-                    if($(this).attr('type') != "hidden")
-                    {
-                        var inputName = $(this).attr('name');
-                        var inputVal = $(this).val();
-
-                        $("#user_shipping input, #user_shipping select").filter(':visible').each(function(){
-
-                            if($(this).attr('name') == inputName)
-                            {
-                                $(this).val(inputVal);
-                            }
-                        });
+                    },
+                    error: function () {
+                        alert("Error in Shipping Address");
                     }
                 });
             }

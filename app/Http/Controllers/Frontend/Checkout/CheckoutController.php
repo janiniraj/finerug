@@ -438,8 +438,10 @@ class CheckoutController extends Controller
                 Cart::session($cartId)->condition($condition);
 
                 return response()->json([
-                    'rates' => $passRates
-                    ]);
+                    'rates' => $passRates,
+                    'tax'   => $tax,
+                    'subtotal' => Cart::session($cartId)->getSubTotal()
+                ]);
             } catch (Exception $e) {
                 return response()->json([
                     'error' => $e
@@ -482,7 +484,7 @@ class CheckoutController extends Controller
                 $response = $av->validate($address);
             } catch (Exception $e) {
                 return response()->json([
-                    'message' => "Error in Address"
+                    'error' => "Error in Address, Not a valid address"
                 ]);
             }
 
@@ -578,8 +580,6 @@ class CheckoutController extends Controller
                         'shipping'        => $passRates
                     ]);
 
-                    dd($order_taxes);
-
                     if(isset($order_taxes->amount_to_collect))
                     {
                         $tax = $order_taxes->amount_to_collect;
@@ -602,7 +602,7 @@ class CheckoutController extends Controller
                     }
                 }
                 catch(Exception $e)
-                {die("ss");
+                {
                     return response()->json([
                         'error' => "Error in State and Zipcode validation."
                     ]);
@@ -618,9 +618,10 @@ class CheckoutController extends Controller
                 ));
 
                 Cart::session($cartId)->condition($condition);
-
                 return response()->json([
-                    'rates' => $passRates
+                    'rates' => $passRates,
+                    'tax'   => $tax,
+                    'subtotal' => Cart::session($cartId)->getTotal()
                 ]);
             } catch (Exception $e) {
                 return response()->json([

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f0490afc883dc91e28557ca3789aa8a",
+    "content-hash": "3107b48faba81712e318dfd4bc6723cd",
     "packages": [
         {
             "name": "arcanedev/log-viewer",
@@ -4135,6 +4135,53 @@
                 "dump"
             ],
             "time": "2019-10-04T07:44:32+00:00"
+        },
+        {
+            "name": "taxjar/taxjar-php",
+            "version": "v1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/taxjar/taxjar-php.git",
+                "reference": "a1d491c9498fe378d8402c01389437e60345306f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/taxjar/taxjar-php/zipball/a1d491c9498fe378d8402c01389437e60345306f",
+                "reference": "a1d491c9498fe378d8402c01389437e60345306f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0.2",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "internations/http-mock": "0.10.1",
+                "phpunit/phpunit": "4.8.*",
+                "silex/silex": "2.2.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TaxJar\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "TaxJar"
+                }
+            ],
+            "description": "Sales Tax API Client for PHP 5.5+",
+            "homepage": "https://www.taxjar.com/",
+            "keywords": [
+                "api",
+                "sales tax",
+                "taxjar"
+            ],
+            "time": "2019-09-30T18:39:42+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
