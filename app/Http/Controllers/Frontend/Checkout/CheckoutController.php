@@ -480,11 +480,12 @@ class CheckoutController extends Controller
             $av = new \Ups\SimpleAddressValidation(env('UPS_ACCESS_KEY'), env('UPS_USERID'), env('UPS_PASSWORD'));
             try {
                 $response = $av->validate($address);
-                var_dump($response);
             } catch (Exception $e) {
-                var_dump($e);
+                return response()->json([
+                    'message' => "Error in Address"
+                ]);
             }
-die("here");
+
             $rate = new \Ups\Rate(
                 env('UPS_ACCESS_KEY'),
                 env('UPS_USERID'),
@@ -511,7 +512,7 @@ die("here");
 
                 $package = new \Ups\Entity\Package();
                 $package->getPackagingType()->setCode(\Ups\Entity\PackagingType::PT_PACKAGE);
-                $package->getPackageWeight()->setWeight(10);
+                $package->getPackageWeight()->setWeight(22);
 
                 // if you need this (depends of the shipper country)
                 /*$weightUnit = new \Ups\Entity\UnitOfMeasurement;
@@ -532,6 +533,7 @@ die("here");
                 $shipment->addPackage($package);
 
                 $rates = $rate->getRate($shipment);
+
                 if(isset($rates->RatedShipment) && isset($rates->RatedShipment[0]))
                 {
                     $passRates = $rates->RatedShipment[0]->TotalCharges->MonetaryValue;
@@ -576,6 +578,8 @@ die("here");
                         'shipping'        => $passRates
                     ]);
 
+                    dd($order_taxes);
+
                     if(isset($order_taxes->amount_to_collect))
                     {
                         $tax = $order_taxes->amount_to_collect;
@@ -598,7 +602,7 @@ die("here");
                     }
                 }
                 catch(Exception $e)
-                {
+                {die("ss");
                     return response()->json([
                         'error' => "Error in State and Zipcode validation."
                     ]);
