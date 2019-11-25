@@ -361,7 +361,7 @@
                 {{ Form::close() }}
 
 
-                {{ Form::open(['route' => 'frontend.checkout.before-payment', 'id' => 'user_payment', 'class' => 'form-horizontal needs-validation', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
+                {{ Form::open(['route' => 'frontend.checkout.stripe', 'id' => 'user_payment', 'class' => 'form-horizontal needs-validation', 'role' => 'form', 'method' => 'post', 'files' => true]) }}
                     <h4 class="mb-3">Payment</h4>
                     <div class="d-block my-3">
                         <div class="custom-control custom-radio">
@@ -380,7 +380,7 @@
                     <div class="row card-details-container">
                         <div class="col-md-6 mb-3">
                             <label for="cc-name">Name on card</label>
-                            <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                            <input type="text" class="form-control" name="cc_name" id="cc-name" placeholder="John" required>
                             <small class="text-muted">Full name as displayed on card</small>
                             <div class="invalid-feedback">
                                 Name on card is required
@@ -388,22 +388,37 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="cc-number">Credit card number</label>
-                            <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                            <input type="number" maxlength="20" class="form-control" name="cc_card_no" id="cc-number" placeholder="" required>
                             <div class="invalid-feedback">
                                 Credit card number is required
                             </div>
                         </div>
 
-                        <div class="col-md-3 mb-3">
-                            <label for="cc-expiration">Expiration</label>
-                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                        <div class="col-md-2 mb-2">
+                            <label for="cc-expiration">Month</label>
+                            <select name="cc_expiry_month" class="custom-select d-block w-50" id="cc_expiry_month" required>
+                                @for($i = 1; $i <= 12; $i++)
+                                    <option value="{{str_pad($i, 2, '0', STR_PAD_LEFT)}}" @php if($i == 1){ echo 'selected'; } @endphp>{{str_pad($i, 2, '0', STR_PAD_LEFT)}}</option>
+                                @endfor
+                            </select>
                             <div class="invalid-feedback">
-                                Expiration date required
+                                Expiration Month required
+                            </div>
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <label for="cc-expiration">Year</label>
+                            <select name="cc_expiry_year" class="custom-select d-block w-50" id="cc_expiry_year" required>
+                                @for($i = date('Y'); $i <= 2050; $i++)
+                                    <option value="{{ $i }}" @php if($i == date('Y')){ echo 'selected'; } @endphp>{{ $i }}</option>
+                                @endfor
+                            </select>
+                            <div class="invalid-feedback">
+                                Expiration Year required
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <label for="cc-expiration">CVV</label>
-                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                            <input type="text" class="form-control" name="cc_cvv" id="cc-cvv" placeholder="" required>
                             <div class="invalid-feedback">
                                 Security code required
                             </div>

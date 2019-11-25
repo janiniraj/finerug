@@ -216,6 +216,7 @@ return [
 
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
 
+        Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
     ],
 
     /*
@@ -286,7 +287,9 @@ return [
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
 
-        'PayPal' => Srmklive\PayPal\Facades\PayPal::class
+        'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
+
+        'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
 
     ],
 

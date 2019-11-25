@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend\Checkout;
 use App\Http\Controllers\Controller;
 //use Session, Cart, Auth, Ups;
-use Session, Cart, Auth;
+use Session, Cart, Auth, Validator;
 use App\Models\Product\ProductSize;
 use App\Repositories\Backend\Product\ProductRepository;
 use App\Models\UserAddress\UserAddress;
@@ -15,7 +15,8 @@ use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Services\AdaptivePayments;
 //Use Beaudierman\Ups;
 
-//require __DIR__ . '/vendor/autoload.php';
+use Stripe\Error\Card;
+use Stripe;
 
 
 
@@ -1064,5 +1065,70 @@ class CheckoutController extends Controller
             'productRepository' => $this->productRepository,
             'productSize'       => $this->productSize,
         ]);
+    }
+
+    public function paymentStripe()
+    {
+        return view('frontend.checkout.paymentstripe');
+    }
+
+    public function postPaymentStripe(Request $request)
+    {
+        if(Session::has('cartSessionId'))
+        {
+            $cartId = Session::get('cartSessionId');
+        }
+        else
+        {
+            $cartId = rand(0,9999);
+            session(['cartSessionId' => $cartId]);
+        }
+
+        $cartData = Cart::session($cartId);
+
+        $validator = Validator::make($request->all(), [
+            'cc_name' => 'required',
+            'cc_card_no' => 'required',
+            'cc_expiry_month' => 'required',
+            'cc_expiry_year' => 'required',
+            'cc_cvv' => 'required',
+            'amount' => 'required',
+        ]);
+        $input = $request->all();
+        if ($validator->passes()) {
+            $input = array_except($input,array('_token'));
+            $stripe = Stripe::setApiKey(env('STRIPE_SECRET'));
+            try {
+                $token = $stripe->tokens()->create([
+                    'card' => [
+                        'number' => $request->get('cc_card_no'),
+                        'exp_month' => $request->get('cc_expiry_month'),
+                        'exp_year' => $request->get('cc_expiry_year'),
+                        'cvc' => $request->get('cc_cvv'),
+                    ],
+                ]);
+                if (!isset($token['id'])) {
+                    return redirect()->route('frontend.checkout.cart')->withFlashWarning("Error from Stripe Account Setup");
+                }
+                $charge = $stripe->charges()->create([
+                    'card' => $token['id'],
+                    'currency' => 'USD',
+                    'amount' => Cart::session($cartId)->getTotal(),
+                    'description' => 'wallet',
+                ]);
+
+                if($charge['status'] == 'succeeded') {
+                    return redirect()->route('frontend.index')->withFlashSuccess("Payment Successful.");
+                } else {
+                    return redirect()->route('frontend.checkout.cart')->withFlashWarning("Error from Payment Gateway");
+                }
+            } catch (Exception $e) {
+                return redirect()->route('frontend.checkout.cart')->withFlashWarning("Error occured in stripe payment.");
+            } catch(\Cartalyst\Stripe\Exception\CardErrorException $e) {
+                return redirect()->route('frontend.checkout.cart')->withFlashWarning("Card is not valid");
+            } catch(\Cartalyst\Stripe\Exception\MissingParameterException $e) {
+                return redirect()->route('frontend.checkout.cart')->withFlashWarning("Parameters are missing for Stripe payment.");
+            }
+        }
     }
 }

@@ -90,6 +90,8 @@ Route::group(['namespace' => 'Checkout', 'as' => 'checkout.', 'prefix' => 'check
     Route::get('before-payment', 'CheckoutController@beforePayment')->name('before-payment');
     Route::get('payment/success', 'CheckoutController@afterPayment')->name('after-payment');
     Route::get('overview', 'CheckoutController@overview')->name('overview');
+    //Route::get('addmoney/stripe', array('as' => 'addmoney.paystripe','uses' => 'CheckoutController@PaymentStripe'));
+    Route::post('stripe', array('as' => 'stripe','uses' => 'CheckoutController@postPaymentStripe'));
 });
 
 Route::post('email-subscription', 'FrontendController@emailSubscription')->name('email-subscription');
