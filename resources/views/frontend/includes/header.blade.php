@@ -70,6 +70,7 @@ $cartCount = Cart::getTotalQuantity();
             	<div class="nav-wrap">
             	<nav class="nav-menu">
                 	<ul class="list-unstyled m-0 menu">
+                        <li><a href="{{ route('frontend.index') }}">Home</a></li>
                     	<li><a href="{{ route('frontend.product.product-by-type', ['type' => 'rug']) }}" >Rug</a>
                          	<div class="sub-menu lg-sub">
                             	<h2>Rugs <span class="backmain">&laquo; Back</span></h2>
