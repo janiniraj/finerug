@@ -83,7 +83,7 @@
               
             </ul>
             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show" id="shop_by_categories">
+              <div class="tab-pane fade show active in" id="shop_by_categories">
               	<div class="row">
 				@foreach($categories as $category)
 					@if(file_exists(public_path().'/img/category/'.$category->icon) and $category->icon)
