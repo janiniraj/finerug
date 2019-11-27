@@ -98,7 +98,7 @@
                                    	    	<img src="inc/img/img01.jpg" alt=""/> 
                                             <div>
                                                 <h4>extra 30% off</h4>	
-                                                <p>Select Area Rugs by Nourison*</p>
+                                                <p>Select Area Rugs by FineRugs Direct*</p>
                                             </div>
                                             </a>
                                         </div>	

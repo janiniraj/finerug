@@ -164,7 +164,7 @@ $cartCount = Cart::getTotalQuantity();
                                    	    	<img src="/frontend/inc/img/img01.jpg" alt=""/> 
                                             <div>
                                                 <h4>extra 30% off</h4>	
-                                                <p>Select </p>
+                                                <p>Select Area Rugs by Nourison*</p>
                                             </div>
                                             </a>
                                         </div>	

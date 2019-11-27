@@ -33,10 +33,10 @@
                             </ul>
                         </div>
                         <div class="col-xl-2 col-md-4">
-                        	<h2>Furniture</h2>
+                        	<h2>Kashan</h2>
                             <ul class="list-unstyled m-0 pb-3">
-                            	<li><a href="#">Kitchen Furniture</a></li>
-                                <li><a href="#">Kitceh Cabinets</a></li>
+                            	<li><a href="#">Antique</a></li>
+                                <li><a href="#">Vintage</a></li>
                             </ul>
                         </div>
                         <div class="col-xl-2 col-md-4">
