@@ -9,10 +9,10 @@ $helper = new MenuHelper();
         	<div class="footer-top">
             	<div class="foot-signup red-gradient text-white p-3">
                 	<h2 class="text-uppercase h4 m-0 pt-4">sign up</h2>
-                    <form class="d-block py-2 mb-2">
-                    	<input type="text" placeholder="Email Id">
-                    	<input type="button" value="Submit">
-                    </form>
+                    {{ Form::open(['method' => 'POST', 'class' => 'd-block py-2 mb-2', 'id' => 'emailsubscriptionform', 'url' => route('frontend.email-subscription')]) }}
+                    	<input required class="email-submit-input" type="text" name="email" placeholder="Email Id">
+                    	<input class="email-submit-button" type="submit" value="Submit">
+                    {{ Form::close() }}
                     <p>sign up today for</p>
                     <h4>20% off <strong>coupon</strong></h4>
                 </div>
@@ -105,7 +105,8 @@ $helper = new MenuHelper();
     <script src="{{ URL::to('/') }}/frontend/inc/src/carousel/owl.carousel.min.js" ></script>
     <script src="{{ URL::to('/') }}/frontend/inc/src/custom_scroll/jquery.mCustomScrollbar.js" ></script>
     <script src="{{ URL::to('/') }}/frontend/inc/src/range_sllider/ion.rangeSlider.js" ></script>
-    <script src="{{ URL::to('/') }}/frontend/inc/src/js/custom.js" ></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="{{ URL::to('/') }}/frontend/inc/src/js/custom.js" ></script>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	

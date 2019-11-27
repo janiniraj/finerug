@@ -241,6 +241,42 @@ $(document).ready(function() {
 			});
 		}
     }).resize();
+
+	/*$(".email-submit-button").on("click", function () {
+		$("#emailsubscriptionform").submit();
+	});*/
+
+	$("#emailsubscriptionform").submit(function (e) {
+		e.preventDefault();
+		$.ajax({
+			url:      $(this).attr('action'),
+			type:     $(this).attr('method'),
+			data:     $(this).serialize(),
+			success: function(data) {
+				if(data.success == true)
+				{
+					Swal.fire({
+						position: 'middle',
+						icon: 'success',
+						title: data.message,
+						showConfirmButton: false,
+						timer: 1500
+					});
+				}
+				else
+				{
+					Swal.fire({
+						position: 'middle',
+						icon: 'error',
+						title: data.message,
+						showConfirmButton: false,
+						timer: 1500
+					});
+				}
+				$(".email-submit-input").val("");
+			}
+		});
+	});
 	
 });
 

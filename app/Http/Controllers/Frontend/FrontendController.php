@@ -61,11 +61,13 @@ class FrontendController extends Controller
 
         if($flag)
         {
-            return redirect()->route('frontend.index')->withFlashSuccess('Thank you for Subscribing.');
+            //return redirect()->route('frontend.index')->withFlashSuccess('Thank you for Subscribing.');
+            return response()->json(['success' => true, 'message' => 'Thank you for Email signup.']);
         }
         else
         {
-            return redirect()->route('frontend.index')->withFlashWarning('Error in adding email in subscription list.');
+            //return redirect()->route('frontend.index')->withFlashWarning('Error in adding email in subscription list.');
+            return response()->json(['success' => false, 'message' => 'Email already exist in subscription list.']);
         }
     }
 }

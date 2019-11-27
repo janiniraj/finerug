@@ -168,6 +168,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .foot-signup input[type="text"]{ border:0; background:#fff; padding:10px 12px; font-size:14px; font-weight:500; color:#fd0733; margin-bottom:10px;}
 .foot-signup input[type="button"]{ background:#871126; color:#fff; font-weight:500; font-size:14px; text-transform:uppercase; padding:8px 12px; border:0;}
 .foot-signup input[type="button"]:hover{ background:#222;}
+.foot-signup input[type="submit"]{ background:#871126; color:#fff; font-weight:500; font-size:14px; text-transform:uppercase; padding:8px 12px; border:0;}
+.foot-signup input[type="submit"]:hover{ background:#222;}
 .foot-signup p{font-size:18px; font-weight:500; text-transform:uppercase; margin:0; padding:0;}
 .foot-signup h4{ font-size:36px; font-weight:500; line-height:32px; margin:0; padding:0; text-transform:uppercase;}
 .foot-signup h4 strong{ font-size:30px;}
