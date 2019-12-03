@@ -127,6 +127,13 @@ return [
             'management' => 'Promo Management',
             'main'       => 'Promo',
         ],
+        'orders' => [
+            'all'        => 'All Orders',
+            'create'     => 'Create Order',
+            'edit'       => 'Edit Order',
+            'management' => 'Order Management',
+            'main'       => 'Order',
+        ],
     ],
 
     'language-picker' => [

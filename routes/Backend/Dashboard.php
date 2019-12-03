@@ -197,3 +197,17 @@ Route::group(['namespace' => 'Visitor'], function () {
     Route::post('visitors/get', 'VisitorTableController')
         ->name('visitors.get');
 });
+
+/**
+ *  Order Management
+ */
+Route::group(['namespace' => 'Order'], function () {
+    Route::resource('orders', 'OrderController', ['except' =>
+        ['show']]);
+
+    //For DataTables
+    Route::post('orders/get', 'OrderTableController')
+        ->name('orders.get');
+    Route::get('order/{id}/show', 'OrderController@show')
+        ->name('orders.show');
+});

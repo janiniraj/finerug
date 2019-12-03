@@ -325,6 +325,23 @@ return [
                 'all'            => 'All',
             ],
         ],
+
+
+        'orders' => [
+            'create'     => 'Create Order',
+            'edit'       => 'Edit Order',
+            'management' => 'Order Management',
+            'title' => 'Order',
+
+            'table' => [
+                'title'          => 'Order Number',
+                'status'         => 'Status',
+                'subtotal'       => 'Sub Total',
+                'total'          => 'Total',
+                'createdat'      => 'Created At',
+                'all'            => 'All',
+            ],
+        ],
     ],
 
     'frontend' => [

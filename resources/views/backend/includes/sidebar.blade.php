@@ -139,6 +139,15 @@
             </li>
             @endif
 
+            @if(access()->hasPermission('order-management'))
+                <li class="{{ active_class(Active::checkUriPattern('admin/orders')) }}">
+                    <a href="{{ route('admin.orders.index') }}">
+                        <i class="fa fa-delicious"></i>
+                        <span>Order Management</span>
+                    </a>
+                </li>
+            @endif
+
             @if(access()->hasPermission('slide-management'))
             <li class="{{ active_class(Active::checkUriPattern('admin/home-slider')) }}">
                 <a href="{{ route('admin.home-slider.index') }}">
