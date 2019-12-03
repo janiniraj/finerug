@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend\Checkout;
 use App\Http\Controllers\Controller;
 //use Session, Cart, Auth, Ups;
+use App\Models\Order\Order;
+use App\Models\Order\OrderProduct;
 use Session, Cart, Auth, Validator;
 use App\Models\Product\ProductSize;
 use App\Repositories\Backend\Product\ProductRepository;
@@ -471,6 +473,15 @@ class CheckoutController extends Controller
         $model->country = 'USA';
 
         $model->save();
+
+        if($postData['type'] == 'shipping')
+        {
+            session(['shippingUserAddressID' => $model->id]);
+        }
+        else
+        {
+            session(['billingUserAddressID' => $model->id]);
+        }
 
         if($postData['type'] == 'shipping')
         {
@@ -1072,8 +1083,72 @@ class CheckoutController extends Controller
         return view('frontend.checkout.paymentstripe');
     }
 
+    public function beforePaymentOrder()
+    {
+        $cartId = Session::get('cartSessionId');
+        $cartData = Cart::session($cartId);
+
+        $checkCartCondition = $cartData->getConditions();
+        $shipping = 0;
+        $tax = 0;
+        $billingAddressId = 0;
+        $shippingAddressId = 0;
+
+        if(Session::has('shippingUserAddressID'))
+        {
+            $shippingAddressId = Session::get('shippingUserAddressID');
+        }
+
+        if(Session::has('billingUserAddressID'))
+        {
+            $billingAddressId = Session::get('billingUserAddressID');
+        }
+
+        foreach ($checkCartCondition as $singleCondition)
+        {
+            if($singleCondition->getName() == 'tax')
+            {
+                $tax = $singleCondition->getValue();
+            }
+            if($singleCondition->getName() == 'shipping')
+            {
+                $shipping = $singleCondition->getValue();
+            }
+        }
+
+
+        $model = new Order();
+        $model->status = 'pending';
+        $model->subtotal = $cartData->getSubTotal();
+        $model->total = $cartData->getTotal();
+        $model->ship_rate = $shipping;
+        $model->tax = $tax;
+        $model->billing_address_id = $billingAddressId;
+        $model->shipping_address_id = $shippingAddressId;
+
+        $model->save();
+
+        $orderId = $model->id;
+        session(['orderId' => $orderId]);
+
+        foreach ($cartData->getContent() as $singleKey => $singleValue)
+        {
+            $orderProduct = new OrderProduct();
+            $orderProduct->order_id = $orderId;
+            $orderProduct->product_id = $singleValue->attributes->product_id;
+            $orderProduct->quantity = $singleValue->quantity;
+            $orderProduct->price = $singleValue->price;
+            $orderProduct->attributes = $singleValue->attributes;
+            $orderProduct->save();
+        }
+    }
+
     public function postPaymentStripe(Request $request)
     {
+        $this->beforePaymentOrder();
+
+        $orderId = Session::get('orderId');
+
         if(Session::has('cartSessionId'))
         {
             $cartId = Session::get('cartSessionId');
@@ -1118,8 +1193,12 @@ class CheckoutController extends Controller
                 ]);
 
                 if($charge['status'] == 'succeeded') {
+                    Order::where('id', $orderId)->update(array('status' => 'payment success'));
+                    Cart::clear();
+
                     return redirect()->route('frontend.index')->withFlashSuccess("Payment Successful.");
                 } else {
+                    Order::where('id', $orderId)->update(array('status' => 'payment failed'));
                     return redirect()->route('frontend.checkout.cart')->withFlashWarning("Error from Payment Gateway");
                 }
             } catch (Exception $e) {
@@ -1129,6 +1208,9 @@ class CheckoutController extends Controller
             } catch(\Cartalyst\Stripe\Exception\MissingParameterException $e) {
                 return redirect()->route('frontend.checkout.cart')->withFlashWarning("Parameters are missing for Stripe payment.");
             }
+        } else
+        {
+            return redirect()->route('frontend.checkout.cart')->withFlashWarning("Parameters are missing for Request.");
         }
     }
 }

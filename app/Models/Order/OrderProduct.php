@@ -15,7 +15,7 @@ class OrderProduct extends Model
      */
     protected $table;
 
-    protected $fillable = ["order_id", "product_id", "price", "attributes", "created_at", "updated_at"];
+    protected $fillable = ["order_id", "product_id", "price", "attributes", "created_at", "updated_at", "quantity"];
 
     public function __construct(array $attributes = [])
     {
