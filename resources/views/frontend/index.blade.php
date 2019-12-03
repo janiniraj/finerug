@@ -193,8 +193,49 @@
               <div class="tab-pane fade" id="shop_by_colors" >
               	Cooming Sooon
               </div>
-              <div class="tab-pane fade" id="shop_by_popular_sizes" >
-              	Cooming Sooon
+              <div class="tab-pane fade" id="shop_by_sizes" >
+                  <div class="row">
+                      <div class="col-md-3 size-front-container text-center">
+                          <div class="size-front-inner">
+                            <a href="{{ route('frontend.product.product-by-type').'?type=rug&size=2x3'}}" class="btn size-front-button"> 2 x 3 </a>
+                          </div>
+                      </div>
+                      <div class="col-md-3 size-front-container text-center">
+                          <div class="size-front-inner">
+                            <a href="{{ route('frontend.product.product-by-type').'?type=rug&size=3x5'}}" class="btn size-front-button"> 3 x 5 </a>
+                          </div>
+                      </div>
+                      <div class="col-md-3 size-front-container text-center">
+                          <div class="size-front-inner">
+                            <a href="{{ route('frontend.product.product-by-type').'?type=rug&size=4x6'}}" class="btn size-front-button"> 4 x 6 </a>
+                          </div>
+                      </div>
+                      <div class="col-md-3 size-front-container text-center">
+                          <div class="size-front-inner">
+                            <a href="{{ route('frontend.product.product-by-type').'?type=rug&size=5x8'}}" class="btn size-front-button"> 5 x 8 </a>
+                          </div>
+                      </div>
+                      <div class="col-md-3 size-front-container text-center">
+                          <div class="size-front-inner">
+                            <a href="{{ route('frontend.product.product-by-type').'?type=rug&size=6x9'}}" class="btn size-front-button"> 6 x 9 </a>
+                          </div>
+                      </div>
+                      <div class="col-md-3 size-front-container text-center">
+                          <div class="size-front-inner">
+                            <a href="{{ route('frontend.product.product-by-type').'?type=rug&size=8x10'}}" class="btn size-front-button"> 8 x 10 </a>
+                          </div>
+                      </div>
+                      <div class="col-md-3 size-front-container text-center">
+                          <div class="size-front-inner">
+                            <a href="{{ route('frontend.product.product-by-type').'?type=rug&size=9x12'}}" class="btn size-front-button"> 9 x 12 </a>
+                          </div>
+                      </div>
+                      <div class="col-md-3 size-front-container text-center">
+                          <div class="size-front-inner">
+                            <a href="{{ route('frontend.product.product-by-type').'?type=rug&size=10x14'}}" class="btn size-front-button"> 10 x 14 </a>
+                          </div>
+                      </div>
+                  </div>
               </div>
             </div>
         </div>

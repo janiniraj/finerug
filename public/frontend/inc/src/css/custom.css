@@ -440,3 +440,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .modal-dialog{
   pointer-events: auto !important;
 }
+
+.size-front-inner {
+  margin: 15px;
+  background: #eeeeee;
+  color: #2e2e2e;
+  border-radius: 25px;
+}
+.size-front-inner a {
+  font-size: 18px;
+  padding: 45px 0;
+}
