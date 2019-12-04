@@ -123,4 +123,9 @@ class ColorRepository extends BaseRepository
             throw new GeneralException(trans('exceptions.backend.colors.delete_error'));
         });
     }
+
+    public function getAllActive()
+    {
+        return $this->query()->where('status', 1)->get();
+    }
 }

@@ -191,7 +191,11 @@
                 </div>
               </div>
               <div class="tab-pane fade" id="shop_by_colors" >
-              	Cooming Sooon
+                  <div class="row">
+                      @foreach($colorList as $single)
+                          <a class="col-md-1 color-front-button" href="{{ route('frontend.product.product-by-type').'?type=rug&color='. $single->id}}" style="background-color: {{$single->name}};"></a>
+                      @endforeach
+                  </div>
               </div>
               <div class="tab-pane fade" id="shop_by_sizes" >
                   <div class="row">

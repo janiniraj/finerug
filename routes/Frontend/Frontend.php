@@ -12,6 +12,7 @@ Route::get('macros', 'FrontendController@macros')->name('macros');
 Route::get('contact', 'ContactController@index')->name('contact');
 Route::post('contact/send', 'ContactController@send')->name('contact.send');
 Route::get('login', 'ContactController@loginPage')->name('login');
+Route::get('auth/login', 'ContactController@loginPage')->name('auth.login');
 
 Route::get('about-us', 'PageController@aboutUs')->name('page.about-us');
 Route::get('press', 'PageController@press')->name('page.press');

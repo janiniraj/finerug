@@ -451,3 +451,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
   font-size: 18px;
   padding: 45px 0;
 }
+
+.color-front-button {
+  height: 50px;
+  margin: 15px;
+  border-radius: 5px;
+  border: solid 1px #ccc;
+}

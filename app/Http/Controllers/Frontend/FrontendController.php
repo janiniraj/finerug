@@ -9,6 +9,7 @@ use App\Repositories\Backend\SubCategories\SubCategoriesRepository;
 use App\Repositories\Backend\Product\ProductRepository;
 use Illuminate\Http\Request;
 use App\Repositories\Backend\Subscription\SubscriptionRepository;
+use App\Repositories\Backend\Color\ColorRepository;
 
 /**
  * Class FrontendController.
@@ -23,6 +24,7 @@ class FrontendController extends Controller
         $this->homeSlider       = new HomeSliderRepository();
         $this->product          = new ProductRepository();
         $this->subscription     = new SubscriptionRepository();
+        $this->color            = new ColorRepository();
     }
 
     /**
@@ -38,12 +40,15 @@ class FrontendController extends Controller
 
         $furnitures    = $this->product->query()->where('type','furniture')->limit(10)->get();
 
+        $colorList      = $this->color->getAllActive();
+
         return view('frontend.index')->with([
             'categories'    => $categories,
             'slides'        => $slides,
             'collections'   => $collections,
             'newArrivals'   => $newArrivals,
-            'furnitures'	=> $furnitures
+            'furnitures'	=> $furnitures,
+            'colorList'     => $colorList
         ]);
     }
 
