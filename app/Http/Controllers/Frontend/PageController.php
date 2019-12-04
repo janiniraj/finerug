@@ -10,6 +10,7 @@ use App\Mail\dealerEmail;
 use App\Repositories\Backend\Setting\SettingRepository;
 use App\Models\Mailinglist\Mailinglist;
 use App\Repositories\Backend\Store\StoreRepository;
+use App\Repositories\Backend\Promo\PromoRepository;
 
 /**
  * Class PageController.
@@ -24,6 +25,7 @@ class PageController extends Controller
         $this->settings         = new SettingRepository();
         $this->mailinglist      = new Mailinglist();
         $this->storeRepository  = new StoreRepository();
+        $this->promos           = new PromoRepository();
     }
 
     /**
@@ -506,6 +508,15 @@ class PageController extends Controller
 
         return view('frontend.page.store')->with([
             'stores'  => $stores,
+        ]);
+    }
+
+    public function coupons()
+    {
+        $promoList = $this->promos->getAllActive();
+
+        return view('frontend.page.coupons')->with([
+            'promoList'  => $promoList,
         ]);
     }
 

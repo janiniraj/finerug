@@ -458,3 +458,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
   border-radius: 5px;
   border: solid 1px #ccc;
 }
+
+.promo-image {
+  background: #eeeeee;
+  color: #2e2e2e;
+  padding: 60px 0;
+  font-size: 18px;
+}
+
+.promo-card .card-text {
+  font-size: 12px;
+}
+
+.promo-card .card-title {
+  font-size: 16px;
+  margin-bottom: 2.5rem;
+}
+
+.promo-card .card-name {
+  font-size: 14px;
+}

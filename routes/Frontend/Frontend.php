@@ -97,3 +97,4 @@ Route::group(['namespace' => 'Checkout', 'as' => 'checkout.', 'prefix' => 'check
 
 Route::post('email-subscription', 'FrontendController@emailSubscription')->name('email-subscription');
 Route::post('mailing-submit', 'PageController@mailingSubmit')->name('page.mailing-submit');
+Route::get('coupons', 'PageController@coupons')->name('page.coupons');

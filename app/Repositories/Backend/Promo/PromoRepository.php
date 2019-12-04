@@ -56,6 +56,7 @@ class PromoRepository extends BaseRepository
             $promos->discount = $input['discount'];
             $promos->status = (isset($input['status']) && $input['status'] == 1)
                  ? 1 : 0;
+            $promos->description = $input['description'];
 
             if ($promos->save()) {
 
@@ -91,6 +92,7 @@ class PromoRepository extends BaseRepository
         $promos->discount = $input['discount'];
         $promos->status = (isset($input['status']) && $input['status'] == 1)
                  ? 1 : 0;
+        $promos->description = $input['description'];
 
         DB::transaction(function () use ($promos, $input) {
         	if ($promos->save()) {

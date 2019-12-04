@@ -3,7 +3,7 @@ use App\Helpers\Frontend\MenuHelper;
 $helper = new MenuHelper();
 ?>
 
-    
+
     <footer class="px-md-4 bg-dark">
     	<div class="container-fluid">
         	<div class="footer-top">
@@ -48,7 +48,7 @@ $helper = new MenuHelper();
                         <div class="col-xl-2 col-md-4">
                         	<h2>shop </h2>
                             <ul class="list-unstyled m-0 pb-3">
-                            	<li><a href="#">Coupons</a></li>
+                            	<li><a href="{{ route('frontend.page.coupons') }}">Coupons</a></li>
                                 <li><a href="#">New Arrivals</a></li>
                                 <li><a href="#">Clearance</a></li>
                                 <li><a href="#">where to Buy</a></li>
@@ -93,9 +93,9 @@ $helper = new MenuHelper();
                 </div>
             </div>
         </div>
-    
+
     </footer>
-    
+
 
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -109,4 +109,4 @@ $helper = new MenuHelper();
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="{{ URL::to('/') }}/frontend/inc/src/js/custom.js" ></script>
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	
+

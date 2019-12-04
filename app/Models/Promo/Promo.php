@@ -17,7 +17,7 @@ class Promo extends Model
      */
     protected $table;
 
-    protected $fillable = ["name", "code", "discount", "type", "category", "status", "created_at", "updated_at"];
+    protected $fillable = ["name", "code", "discount", "type", "category", "status", "description", "created_at", "updated_at"];
 
     public function __construct(array $attributes = [])
     {

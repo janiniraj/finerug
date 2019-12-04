@@ -30,6 +30,14 @@
         </div><!--col-lg-10-->
     </div><!--form control-->
 
+    <div class="form-group">
+        {{ Form::label('description', trans('validation.attributes.backend.promos.description'), ['class' => 'col-lg-2 control-label required']) }}
+
+        <div class="col-lg-10">
+            {{ Form::textarea('description', null, ['class' => 'form-control box-size', 'placeholder' => trans('validation.attributes.backend.promos.description'), 'rows' => 3]) }}
+        </div><!--col-lg-10-->
+    </div><!--form control-->
+
 
     
     <div class="form-group">

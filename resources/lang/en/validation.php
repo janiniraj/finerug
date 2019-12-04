@@ -216,6 +216,7 @@ return [
                 'type' => 'Type',
                 'discount' => 'Discount',
                 'is_active' => 'Active',
+                'description' => 'Description'
             ],
         ],
 
