@@ -127,6 +127,11 @@ return [
     'order_product_table' => 'order_products',
 
     /*
+     * Offer Table
+     */
+    'offer_table' => 'offers',
+
+    /*
      * Configurations for the user
      */
     'users' => [

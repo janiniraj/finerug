@@ -22,6 +22,7 @@ use App\Models\Product\ProductReview;
 use App\Models\Product\ProductSize;
 use Redirect;
 use Auth;
+use App\Models\Offer\Offer;
 
 use DB;
 
@@ -988,7 +989,24 @@ class ProductController extends Controller
 
 	public function makeanOffer(Request $request){
 		$postdata  = $request->all();
-		dd($postdata);
+
+		$orderModel = new Offer();
+
+        $orderModel->first_name = $postdata['first_name'];
+        $orderModel->last_name = $postdata['last_name'];
+        $orderModel->email = $postdata['email'];
+        $orderModel->phone = $postdata['phone'];
+        $orderModel->offer_price = $postdata['offer_price'];
+        $orderModel->product_id = $postdata['product_id'];
+
+        if($orderModel->save())
+        {
+            return redirect()->route('frontend.product.show', $postdata['product_id'])->withFlashSuccess("We submitted your request for offer, we will get back to you soon.");
+        }
+        else
+        {
+            return redirect()->route('frontend.product.show', $postdata['product_id'])->withFlashWarning("Error Occured.");
+        }
 		//Mail::send($data);	
 	}
 

@@ -283,6 +283,15 @@
             </li>
             @endif
 
+            @if(access()->hasPermission('offer-management'))
+                <li class="{{ active_class(Active::checkUriPattern('admin/offers')) }}">
+                    <a href="{{ route('admin.offers.index') }}">
+                        <i class="fa fa-delicious"></i>
+                        <span>Offer Management</span>
+                    </a>
+                </li>
+            @endif
+
         </ul><!-- /.sidebar-menu -->
     </section><!-- /.sidebar -->
 </aside>

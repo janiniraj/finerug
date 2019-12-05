@@ -211,3 +211,15 @@ Route::group(['namespace' => 'Order'], function () {
     Route::get('order/{id}/show', 'OrderController@show')
         ->name('orders.show');
 });
+
+/**
+ *  Offer Management
+ */
+Route::group(['namespace' => 'Offer'], function () {
+    Route::resource('offers', 'OfferController', ['except' =>
+        ['show']]);
+
+    //For DataTables
+    Route::post('offers/get', 'OfferTableController')
+        ->name('offers.get');
+});

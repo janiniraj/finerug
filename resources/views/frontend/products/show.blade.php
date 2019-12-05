@@ -389,7 +389,7 @@
     				
     				<tr><td colspan="2" align="center"><input type="submit" name="makeanoffer" class="btn btn-primary" value="Send"></td></tr>
     				</table>
-    				<input type="hidden"  name="prod_id" value="{{$product->id}}" >
+    				<input type="hidden"  name="product_id" value="{{$product->id}}" >
     			  {{ Form::close() }}
     				
     			</div>
