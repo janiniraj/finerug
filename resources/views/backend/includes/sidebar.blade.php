@@ -148,6 +148,15 @@
                 </li>
             @endif
 
+            @if(access()->hasPermission('offer-management'))
+                <li class="{{ active_class(Active::checkUriPattern('admin/offers')) }}">
+                    <a href="{{ route('admin.offers.index') }}">
+                        <i class="fa fa-delicious"></i>
+                        <span>Offer Management</span>
+                    </a>
+                </li>
+            @endif
+
             @if(access()->hasPermission('slide-management'))
             <li class="{{ active_class(Active::checkUriPattern('admin/home-slider')) }}">
                 <a href="{{ route('admin.home-slider.index') }}">
@@ -281,15 +290,6 @@
                     <span>Visitors List</span>
                 </a>
             </li>
-            @endif
-
-            @if(access()->hasPermission('offer-management'))
-                <li class="{{ active_class(Active::checkUriPattern('admin/offers')) }}">
-                    <a href="{{ route('admin.offers.index') }}">
-                        <i class="fa fa-delicious"></i>
-                        <span>Offer Management</span>
-                    </a>
-                </li>
             @endif
 
         </ul><!-- /.sidebar-menu -->
