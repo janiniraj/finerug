@@ -49,7 +49,7 @@ $helper = new MenuHelper();
                         	<h2>shop </h2>
                             <ul class="list-unstyled m-0 pb-3">
                             	<li><a href="{{ route('frontend.page.coupons') }}">Coupons</a></li>
-                                <li><a href="#">New Arrivals</a></li>
+                                <li><a href="{{ route('frontend.product.new-arrival') }}">New Arrivals</a></li>
                                 <li><a href="#">Clearance</a></li>
                                 <li><a href="#">where to Buy</a></li>
                             </ul>
