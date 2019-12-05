@@ -220,7 +220,7 @@
                     <a href="#writeReview" class="btn btn-danger b-r-3 border-0 mb-2" onclick="document.getElementById('writeReview').style.display='block';">Write a Review</a>
                 </div>	
             </div>
-            <div class="py-4">
+            <!--<div class="py-4">
             	<ul class="rating-bars list-unstyled m-0">
                 	<li>
                     	<label>5 Stars</label>
@@ -258,7 +258,7 @@
                         <div class="p-review">35</div>
                     </li>
                 </ul>
-            </div>
+            </div>-->
             <div class="comment-sort my-3">
             	<form class="form-inline">
                               <div class="form-group small mr-4">
