@@ -342,6 +342,25 @@ return [
                 'all'            => 'All',
             ],
         ],
+
+        'offers' => [
+            'create'     => 'Create Offer',
+            'edit'       => 'Edit Offer',
+            'management' => 'Make An Offer Management',
+            'title' => 'Offers',
+
+            'table' => [
+                'product_link'   =>'Product Name',
+                'product_name'   => 'Product Name',
+                'first_name'     => 'First Name',
+                'last_name'      => 'Last Name',
+                'offer_price'    => 'Price Offered',
+                'email'          => 'Email',
+                'phone'          => 'Phone',
+                'createdat'      => 'Created At',
+                'all'            => 'All',
+            ],
+        ],
     ],
 
     'frontend' => [

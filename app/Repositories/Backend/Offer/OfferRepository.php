@@ -25,6 +25,7 @@ class OfferRepository extends BaseRepository
     public function getForDataTable()
     {
         return $this->query()
+            ->leftjoin(config('access.product_table'),config('access.product_table').'.id','=',config('access.offer_table').'.product_id')
             ->select([
                 config('access.offer_table').'.id',
                 config('access.offer_table').'.first_name',
@@ -35,6 +36,7 @@ class OfferRepository extends BaseRepository
                 config('access.offer_table').'.offer_price',
                 config('access.offer_table').'.created_at',
                 config('access.offer_table').'.updated_at',
+                config('access.product_table').'.name as product_name'
             ]);
     }
 

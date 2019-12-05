@@ -25,8 +25,12 @@
                 <table id="offers-table" class="table table-condensed table-hover table-bordered">
                     <thead>
                         <tr>
-                            <th>{{ trans('labels.backend.offers.table.title') }}</th>
-                            <th>{{ trans('labels.backend.offers.table.status') }}</th>
+                            <th>{{ trans('labels.backend.offers.table.product_link') }}</th>
+                            <th>{{ trans('labels.backend.offers.table.offer_price') }}</th>
+                            <th>{{ trans('labels.backend.offers.table.first_name') }}</th>
+                            <th>{{ trans('labels.backend.offers.table.last_name') }}</th>
+                            <th>{{ trans('labels.backend.offers.table.email') }}</th>
+                            <th>{{ trans('labels.backend.offers.table.phone') }}</th>
                             <th>{{ trans('labels.backend.offers.table.createdat') }}</th>
                             <th>{{ trans('labels.general.actions') }}</th>
                         </tr>
@@ -34,12 +38,13 @@
                     <thead class="transparent-bg">
                         <tr>
                             <th>
-                                {!! Form::text('title', null, ["class" => "search-input-text form-control", "data-column" => 0, "placeholder" => trans('labels.backend.offers.table.title')]) !!}
+                                {!! Form::text('title', null, ["class" => "search-input-text form-control", "data-column" => 0, "placeholder" => trans('labels.backend.offers.table.product_name')]) !!}
                                     <a class="reset-data" href="javascript:void(0)"><i class="fa fa-times"></i></a>
                             </th>
                             <th>
-                                {!! Form::select('status', [0 => "InActive", 1 => "Active"], null, ["class" => "search-input-select form-control", "data-column" => 1, "placeholder" => trans('labels.backend.offers.table.all')]) !!}
                             </th>
+                            <th></th>
+                            <th></th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -77,8 +82,12 @@
                     type: 'post'
                 },
                 columns: [
-                    {data: 'name', name: '{{config('access.offer_table')}}.name'},
-                    {data: 'status', name: '{{config('access.offer_table')}}.status'},
+                    {data: 'product_link', name: '{{config('access.offer_table')}}.product_link'},
+                    {data: 'offer_price', name: '{{config('access.offer_table')}}.offer_price'},
+                    {data: 'first_name', name: '{{config('access.offer_table')}}.first_name'},
+                    {data: 'last_name', name: '{{config('access.offer_table')}}.last_name'},
+                    {data: 'email', name: '{{config('access.offer_table')}}.email'},
+                    {data: 'phone', name: '{{config('access.offer_table')}}.phone'},
                     {data: 'created_at', name: '{{config('access.offer_table')}}.created_at'},
                     {data: 'actions', name: 'actions', searchable: false, sortable: false}
                 ],
