@@ -66,6 +66,37 @@
             {{-- {!! history()->renderType('Category') !!} --}}
         </div><!-- /.box-body -->
     </div><!--box box-success-->
+
+    <div class="modal fade" id="offerConvesationModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send Mail to Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {{ Form::open(['route' => 'admin.offers.send-mail', 'role' => 'form', 'method' => 'post', 'id' => 'sendMailForm', 'files' => true]) }}
+                    <div class="modal-body">
+
+                            <input type="hidden" name="offer_id" id="offer_id" value="">
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                <input required name="email" readonly type="text" class="form-control" id="offer_email">
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="col-form-label">Message:</label>
+                                <textarea rows="5" required name="description" class="form-control" id="message-text"></textarea>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Send Mail">
+                    </div>
+                {{ Form::close() }}
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('after-scripts')
@@ -107,5 +138,17 @@
 
             FinBuilders.DataTableSearch.init(dataTable);
         });
+
+        $(document).ready(function () {
+            $(document).on("click",".open-model-offer", function (e) {
+                e.preventDefault();
+                var email = $(this).attr("offer_email");
+                var offer_id = $(this).attr("offer_id");
+                $("#offer_email").val(email);
+                $("#offer_id").val(offer_id);
+
+                $("#offerConvesationModel").modal('show');
+            })
+        })
     </script>
 @endsection

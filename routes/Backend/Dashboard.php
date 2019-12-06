@@ -222,4 +222,7 @@ Route::group(['namespace' => 'Offer'], function () {
     //For DataTables
     Route::post('offers/get', 'OfferTableController')
         ->name('offers.get');
+
+    Route::post('offers/send-mail', 'OfferController@sendMail')
+        ->name('offers.send-mail');
 });

@@ -12,6 +12,8 @@ use App\Http\Requests\Backend\Offer\EditRequest;
 use App\Http\Requests\Backend\Offer\CreateRequest;
 use App\Http\Requests\Backend\Offer\DeleteRequest;
 use App\Http\Requests\Backend\Offer\UpdateRequest;
+use Illuminate\Http\Request;
+use Mail;
 
 /**
  * Class OfferController.
@@ -99,5 +101,34 @@ class OfferController extends Controller
         $this->offers->delete($offer);
 
         return redirect()->route('admin.offers.index')->withFlashSuccess(trans('alerts.backend.offers.deleted'));
+    }
+
+    public function sendMail(Request $request)
+    {
+        $postData = $request->all();
+
+        $offerData = $this->offers->find($postData['offer_id']);
+
+        $flag = Mail::send(
+            'backend.mail-templates.make-an-offer',
+            [
+            'offerData' => $offerData,
+            'postData' => $postData
+            ],
+            function($message) use ($offerData)
+            {
+                $message->to($offerData->email, $offerData->first_name)->subject
+                ('Reply from FineRug -- Make an Offer');
+                $message->from('niraj.jani@outlook.com','Niraj Jani');
+            });
+
+        if($flag)
+        {
+            return redirect()->route('admin.offers.index')->withFlashSuccess("Mail Successfully sent to User");
+        }
+        else
+        {
+            return redirect()->route('admin.offers.index')->withFlashWarning("Error in Sending Mail.");
+        }
     }
 }

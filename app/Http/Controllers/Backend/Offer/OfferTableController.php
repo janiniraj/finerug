@@ -43,7 +43,11 @@ class OfferTableController extends Controller
                 return Carbon::parse($offers->created_at)->toDateString();
             })
             ->addColumn('actions', function ($offers) {
-                return '';
+                return '<div class="">
+                            <a offer_id="'.$offers->id.'" offer_email="'.$offers->email.'" class="btn btn-flat btn-default open-model-offer" href="javascript:void(0);">
+                                <i data-toggle="tooltip" data-placement="top" title="View" class="fa fa-pencil"></i>
+                            </a>
+                        </div>';
                 //return $offers->action_buttons;
             })
             ->make(true);

@@ -18,6 +18,7 @@
             	<div class="col-lg-6 pb-5">
 					<div class="xzoom-container col-md-12">
 					@if(count($images))
+                        @php $mainImageUrl = url('/'). '/img/products/'.$images[0]; @endphp
                         <img class="xzoom" id="xzoom-default" src="{{ url('/'). '/img/products/thumbnail/'.$images[0] }}" xoriginal="{{ url('/'). '/img/products/'.$images[0] }}" />
                         <div class="xzoom-thumbs">
                             @foreach($images as $singleKey => $singleValue)
@@ -118,10 +119,13 @@
                             	<div class="pro-share d-inline-block">
                                 	<label>Share This Product:</label>
                                     <ul class="list-unstyled m-0">
-                                    	<li><a href="#" class="email"><i class="fas fa-envelope"></i></a></li>
-                                        <li><a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#" class="twitter"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#" class="pinterest"><i class="fab fa-pinterest-p"></i></a></li>
+                                        @php
+                                            $productLink = route('frontend.product.show', $product->id);
+                                        @endphp
+                                    	<li><a target="_blank" href="mailto:?subject=Fine Rug, Check out this Product&amp;body=Check out this product {{ $productLink }}" class="email"><i class="fas fa-envelope"></i></a></li>
+                                        <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ $productLink }}" class="facebook"><i class="fab fa-facebook-f"></i></a></li>
+                                        <li><a target="_blank" href="https://twitter.com/intent/tweet?url={{ urlencode($productLink) }}&text=Checkout This Product." class="twitter"><i class="fab fa-twitter"></i></a></li>
+                                        <li><a target="_blank" href="http://pinterest.com/pin/create/button/?url={{ $productLink }}&media={{ $mainImageUrl }}&description=Checkout this FineRug" class="pinterest"><i class="fab fa-pinterest-p"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

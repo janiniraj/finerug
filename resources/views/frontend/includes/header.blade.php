@@ -280,7 +280,7 @@ $cartCount = Cart::getTotalQuantity();
 							</div>	
                         </li>*/ ?>
                         <li><a href="{{ route('frontend.contact') }}">Contact us</a></li>
-                        <li><a href="#">About us </a></li>
+                        <li><a href="{{ route('frontend.page.about-us') }}">About us </a></li>
                     </ul>
                 </nav>
                 <nav class="nav-manu">
