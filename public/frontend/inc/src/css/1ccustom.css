@@ -2,6 +2,7 @@
 @import url("../bootstrap/css/bootstrap.min.css");
 @import url("../carousel/owl.carousel.min.css");
 @import url("../carousel/animate.css");
+
 @import url("../custom_scroll/jquery.mCustomScrollbar.css");
 @import url("../range_sllider/ion.rangeSlider.css");
 
@@ -16,7 +17,7 @@ img{max-width:100%;}
 .bg-gray{ background-color:#f5f5f5;}
 .bg-gray-dark{ background-color:#e4e4e4;}
 .bg-dark{ background:#4f4f4f;}
-
+ 
 .text-danger{ color:#FE022C !important}
 
 .page-link:hover,.page-link:focus{ box-shadow:none}
@@ -167,6 +168,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .foot-signup input[type="text"]{ border:0; background:#fff; padding:10px 12px; font-size:14px; font-weight:500; color:#fd0733; margin-bottom:10px;}
 .foot-signup input[type="button"]{ background:#871126; color:#fff; font-weight:500; font-size:14px; text-transform:uppercase; padding:8px 12px; border:0;}
 .foot-signup input[type="button"]:hover{ background:#222;}
+.foot-signup input[type="submit"]{ background:#871126; color:#fff; font-weight:500; font-size:14px; text-transform:uppercase; padding:8px 12px; border:0;}
+.foot-signup input[type="submit"]:hover{ background:#222;}
 .foot-signup p{font-size:18px; font-weight:500; text-transform:uppercase; margin:0; padding:0;}
 .foot-signup h4{ font-size:36px; font-weight:500; line-height:32px; margin:0; padding:0; text-transform:uppercase;}
 .foot-signup h4 strong{ font-size:30px;}
@@ -214,21 +217,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ background-color:#c3c3c3; width:8px;}
 .mCSB_scrollTools .mCSB_draggerRail{ background-color:#e5e5e5}
 
-.item {
-    transition: transform .3s;
-}
-.item:hover {
-transform: scale(1.1);
-background: white;
-z-index: 1;
-padding-top: 20px;
-padding-bottom: 20px;
-height: 200px;
-}
 
 .pro-grid{ padding-bottom:35px; }
 .pro-grid figure{position:relative; overflow:hidden; margin-bottom:10px;}
-.pro-grid figure a > img{ width:100%;}
+.pro-grid figure a > img{ width:100%; height:350px;}
 .pro-grid .sale{ background:#fc0a36; color:#fff; font-size:10px; font-weight:500; position:absolute; top:0; left:9px; padding:4px 8px; text-transform:uppercase; width:42px; text-align:center; display:none;}
 .pro-grid .sale:after{ content:""; border-bottom:5px solid transparent; border-left:#fc0a36 solid 21px; border-right:#fc0a36 solid 21px; position:absolute; top:100%; left:0;}
 .pro-grid.sale_on .sale{ display:block;}
@@ -444,4 +436,45 @@ height: 200px;
 .rating-bars li label{ width:100%; padding-bottom:0; padding-left:0}
 .rating-bars .bar {width: calc(100% - 60px);}
 .rating-bars li .p-review{ width:60px; padding:0;}
-} 
+}
+.modal-dialog{
+  pointer-events: auto !important;
+}
+
+.size-front-inner {
+  margin: 15px;
+  background: #eeeeee;
+  color: #2e2e2e;
+  border-radius: 25px;
+}
+.size-front-inner a {
+  font-size: 18px;
+  padding: 45px 0;
+}
+
+.color-front-button {
+  height: 50px;
+  margin: 15px;
+  border-radius: 5px;
+  border: solid 1px #ccc;
+}
+
+.promo-image {
+  background: #eeeeee;
+  color: #2e2e2e;
+  padding: 60px 0;
+  font-size: 18px;
+}
+
+.promo-card .card-text {
+  font-size: 12px;
+}
+
+.promo-card .card-title {
+  font-size: 16px;
+  margin-bottom: 2.5rem;
+}
+
+.promo-card .card-name {
+  font-size: 14px;
+}

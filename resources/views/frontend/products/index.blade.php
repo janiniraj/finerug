@@ -235,7 +235,7 @@ if(isset($_GET['price_range'])){
                 	<div class="row">
 						@if(count($products))
 							@foreach($products as $product)
-							<div class="col-xl-3 col-md-4 col-sm-6">
+							<div class="col-xl-3 col-md-4 col-sm-6 item">
 								<div class="pro-grid sale_on favourite_on">
 									<figure>
 										<!--<div class="sale">Sale</div>-->
