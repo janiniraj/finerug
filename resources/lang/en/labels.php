@@ -332,6 +332,7 @@ return [
             'edit'       => 'Edit Order',
             'management' => 'Order Management',
             'title' => 'Order',
+            'view'  => 'View Order Details',
 
             'table' => [
                 'title'          => 'Order Number',

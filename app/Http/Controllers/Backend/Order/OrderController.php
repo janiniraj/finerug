@@ -104,6 +104,8 @@ class OrderController extends Controller
     public function show(Order $order, $orderId)
     {
         $orderData = $order->find($orderId);
-        dd($orderData->orderShipping);
+        return view('backend.orders.show')->with([
+            'orderData' => $orderData
+        ]);
     }
 }
