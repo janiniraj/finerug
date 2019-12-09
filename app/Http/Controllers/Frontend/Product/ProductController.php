@@ -82,10 +82,12 @@ class ProductController extends Controller
             return Redirect::to('products/'.$categoryName.'?'.$appendData);
         }
 
+        $categoryData = [];
         if($categoryName)
         {
             $categoryId     = $this->categories->getCategoryIdByName($categoryName);
-            $collectionList = $this->subcategories->getSubCategoriesByCategory($categoryId); 
+            $collectionList = $this->subcategories->getSubCategoriesByCategory($categoryId);
+            $categoryData   = $this->categories->find($categoryId);
         }
         else
         {
@@ -118,6 +120,8 @@ class ProductController extends Controller
             if(isset($filterData['collection']) && $filterData['collection'])
             {
                 $products = $products->where('products.subcategory_id', $filterData['collection']);
+
+                $collectionId = $filterData['collection'];
             }
 
             if(isset($filterData['style']) && $filterData['style'])
@@ -262,6 +266,12 @@ class ProductController extends Controller
 		$brandList = $brandParam->select('brand')->groupBy('brand')->get();
 		$discountList = $discountParam->select('discount')->where('discount','>',0)->groupBy('discount')->get();
         $filterDisplay = [];
+        $collectionData = [];
+
+        if(isset($collectionId) && $collectionId)
+        {
+            $collectionData = $this->subcategories->find($collectionId);
+        }
 
         $labelType= [
             'type'          => 'Product',
@@ -380,7 +390,9 @@ class ProductController extends Controller
             'discountList'      => $discountList,
             //'clearanceList'     => $clearanceList,
             'sizeList'     		=> $sizeList,
-            'filterDisplay'     => $filterDisplay
+            'filterDisplay'     => $filterDisplay,
+            'categoryData'      => $categoryData,
+            'collectionData'    => $collectionData
         ]);
     }
 

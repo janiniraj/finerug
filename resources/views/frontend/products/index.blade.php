@@ -232,6 +232,14 @@ if(isset($_GET['price_range'])){
 				</form>
                 </div>
                 <div class="right-content">
+                    <div class="row">
+                        @if($collectionData)
+                            <img src="{{ URL::to('/').'/img/subcategory/'.$collectionData->image }}">
+
+                        @elseif($categoryData)
+                            <img src="{{ URL::to('/').'/img/category/'.$categoryData->image }}">
+                        @endif
+                    </div>
                 	<div class="row">
 						@if(count($products))
 							@foreach($products as $product)
