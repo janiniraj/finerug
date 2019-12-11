@@ -457,9 +457,16 @@ class CheckoutController extends Controller
 
     public function AddGuestAddress(Request $request)
     {
+        $userId = 0;
+        if(Auth::check())
+        {
+            $userId = Auth::user()->id;
+        }
+
         $postData = $request->all();
 
         $model = new UserAddress();
+        $model->user_id = $userId;
         $model->type = $postData['type'];
         $model->email = $postData['email'] ? $postData['email'] : 'dsdsdsds@sdds.com';
         $model->first_name = $postData['first_name'];
@@ -1116,8 +1123,14 @@ class CheckoutController extends Controller
             }
         }
 
+        $userId = 0;
+        if(Auth::check())
+        {
+            $userId = Auth::user()->id;
+        }
 
         $model = new Order();
+        $model->user_id = $userId;
         $model->status = 'pending';
         $model->subtotal = $cartData->getSubTotal();
         $model->total = $cartData->getTotal();
