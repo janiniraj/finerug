@@ -285,7 +285,7 @@ $cartCount = Cart::getTotalQuantity();
                 </nav>
                 <nav class="nav-manu">
                 	<ul class="list-unstyled m-0 menu">
-                    	<li><a href="http://54.198.78.175/products?type=all">Shop</a></li>
+                    	<li><a href="{{ route('frontend.page.store') }}">Shop</a></li>
                         <li><a href="#">Sales</a></li>
                         <li><a href="http://54.198.78.175/products?type=all" class="menu-active">Get Free Estimate</a></li>
                     </ul>

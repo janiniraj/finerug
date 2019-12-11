@@ -51,7 +51,7 @@ $helper = new MenuHelper();
                             	<li><a href="{{ route('frontend.page.coupons') }}">Coupons</a></li>
                                 <li><a href="{{ route('frontend.product.new-arrival') }}">New Arrivals</a></li>
                                 <li><a href="#">Clearance</a></li>
-                                <li><a href="#">where to Buy</a></li>
+                                <li><a href="{{ route('frontend.page.store') }}">where to Buy</a></li>
                             </ul>
                         </div>
                         <div class="col-xl-2 col-md-4">

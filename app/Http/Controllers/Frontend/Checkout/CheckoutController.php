@@ -217,7 +217,7 @@ class CheckoutController extends Controller
 				'billingAddress'    => $billingAddress,
 				'shippingAddress'   => $shippingAddress
 				]);
-		   
+
             return view('frontend.checkout.guestCheckout')->with([
                 'cartData'          => $cartData,
                 'productRepository' => $this->productRepository,
