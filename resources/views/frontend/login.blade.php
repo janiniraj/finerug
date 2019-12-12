@@ -105,6 +105,38 @@
 <script>
 $(function() {
 
+	$("#register-form").submit(function (e) {
+		e.preventDefault();
+		$.ajax({
+			url:      $("#register-form").attr('action'),
+			type:     $("#register-form").attr('method'),
+			data:     $("#register-form").serialize(),
+			success: function(data) {
+				console.log(data.redirectPath);
+				if(data.success == true)
+				{
+					Swal.fire({
+						position: 'centre',
+						icon: 'success',
+						title: data.message,
+						showConfirmButton: true,
+						showCancelButton: false,
+						confirmButtonText: 'Okay'
+					}).then((result) => {
+						window.location = data.redirectPath;
+					});
+				}
+				else
+				{
+					alert(data.error);
+				}
+			},
+			error: function () {
+				alert("Error in Validating Address");
+			}
+		});
+	});
+
     $('#login-form-link').click(function(e) {
 		$("#login-form").delay(100).fadeIn(100);
  		$("#register-form").fadeOut(100);
