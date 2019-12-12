@@ -19,7 +19,7 @@
                             <th> </th>
                         </tr>
                     </thead>
-                    <tbody>                                       
+                    <tbody>
                         @foreach($cartData->getContent() as $singleKey => $singleValue)
                             <tr>
                                 @php 

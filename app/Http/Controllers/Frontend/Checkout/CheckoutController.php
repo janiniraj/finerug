@@ -210,18 +210,12 @@ class CheckoutController extends Controller
 						->where('user_id', $userId)
 						->first();
 
-		   return view('frontend.checkout.checkout')->with([
-				'cartData'          => $cartData,
-				'productRepository' => $this->productRepository,
-				'productSize'       => $this->productSize,
-				'billingAddress'    => $billingAddress,
-				'shippingAddress'   => $shippingAddress
-				]);
-
             return view('frontend.checkout.guestCheckout')->with([
                 'cartData'          => $cartData,
                 'productRepository' => $this->productRepository,
-                'productSize'       => $this->productSize
+                'productSize'       => $this->productSize,
+                'billingAddress'    => $billingAddress,
+                'shippingAddress'   => $shippingAddress
             ]);
 		}
         else
