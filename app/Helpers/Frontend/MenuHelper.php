@@ -67,8 +67,8 @@ class MenuHelper
     public function __construct()
     {
         $this->product          = new Product();
-        $this->rugCategoryList  = $this->product->where('products.type', 'rug')->join('categories', 'categories.id', '=', 'products.category_id')->select('categories.*')->groupBy('products.category_id')->get();
-        $this->rugCollection    = $this->product->where('products.type', 'rug')->join('subcategories', 'subcategories.id', '=', 'products.subcategory_id')->select('subcategories.*')->groupBy('products.subcategory_id')->get();
+        $this->rugCategoryList  = $this->product->where('products.type', 'rug')->join('categories', 'categories.id', '=', 'products.category_id')->select('categories.*')->groupBy('products.category_id')->orderBy('categories.category', 'ASC')->get();
+        $this->rugCollection    = $this->product->where('products.type', 'rug')->join('subcategories', 'subcategories.id', '=', 'products.subcategory_id')->select('subcategories.*')->groupBy('products.subcategory_id')->orderBy('subcategories.subcategory', 'ASC')->get();
         $this->rugStyleList     = $this->product->where('products.type', 'rug')->join('styles', 'styles.id', '=', 'products.style_id')->select('styles.*')->groupBy('products.style_id')->get();
         $this->rugMaterialList  = $this->product->where('products.type', 'rug')->join('materials', 'materials.id', '=', 'products.material_id')->select('materials.*')->groupBy('products.material_id')->get();
         $this->rugWeaveList     = $this->product->where('products.type', 'rug')->join('weaves', 'weaves.id', '=', 'products.weave_id')->select('weaves.*')->groupBy('products.weave_id')->get();
