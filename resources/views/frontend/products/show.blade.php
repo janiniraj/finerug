@@ -103,7 +103,7 @@
                             </form>
                         </div>
                         <div class="py-4 pro-btns">
-                            <a href="#" class="btn btn-dark px-3 b-r-3 mb-2"><i class="fas fa-heart"></i></a>
+                            <a href="javascript:void(0);" class="btn btn-dark px-3 b-r-3 mb-2 wishlist-add" route-url="{{ route('frontend.product.add-favourites') }}" is-loggedin="{{Auth::check()}}"><i class="fas fa-heart"></i></a>
                             <a href="#" class="btn btn-danger b-r-3 mb-2" id='add_to_cart'><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                             <a href="{{ route('frontend.product.makean-offer-user') }}" data-toggle="modal" data-target="#make-an-offer" class="btn  btn-primary b-r-3 mb-2"><i class="fas fa-tag"></i> Make an Offer</a>
                         </div>
@@ -497,6 +497,67 @@ $(document).ready(function() {
 			}
 		});
 	}
+	
+	$(document).ready(function () {
+	    var productId = $("#productid").val();
+
+        $(".wishlist-add").on("click", function () {
+            var routeUrl = $(this).attr('route-url');
+            var isLoggedIn = $(this).attr('is-loggedin');
+            if(isLoggedIn == 1)
+            {
+                $.ajax({
+                    type:'GET',
+                    url: routeUrl,
+                    data:{
+                        'product_id' : productId,
+                        'favourite' : 1
+                    },
+                    dataType: 'JSON',
+                    success:function(data) {
+                        if(data.success == true)
+                        {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: data.message,
+                                timer: 2500
+                            }).then(function(){
+                                $(".fav-count").text(data.favCount);
+                            });
+                        }
+                        else
+                        {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: data.message,
+                                timer: 2500
+                            });
+                        }
+                    },
+                    error: function (data) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: data.message,
+                            timer: 2500
+                        });
+                    }
+                });
+            }
+            else
+            {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: "Please login First to add products into Favourite list.",
+                    timer: 2500
+                });
+            }
+
+        })
+    })
 	
 </script>
 @endsection

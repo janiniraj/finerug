@@ -217,6 +217,8 @@ return [
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
 
         Cartalyst\Stripe\Laravel\StripeServiceProvider::class,
+
+        //Bhavinjr\Wishlist\Providers\WishlistServiceProvider::class,
     ],
 
     /*
@@ -290,6 +292,8 @@ return [
         'PayPal' => Srmklive\PayPal\Facades\PayPal::class,
 
         'Stripe' => Cartalyst\Stripe\Laravel\Facades\Stripe::class,
+
+        //'Wishlist' => 'Bhavinjr\Wishlist\Facades\Wishlist',
 
     ],
 

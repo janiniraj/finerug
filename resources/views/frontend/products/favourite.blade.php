@@ -68,20 +68,20 @@
                 success: function(data){
                     if(data.error)
                     {
-                        swal({
-                            title:'Errors',
-                            text: data.message,
-                            type:'error'
-                        }).then(function () {
-
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'error',
+                            title: data.message,
+                            timer: 2500
                         });
                     }
                     else
                     {
-                        swal({
-                            title:'Thank you!',
-                            text: data.message,
-                            type:'success'
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: data.message,
+                            timer: 2500
                         }).then(function () {
                             parent.remove();
                         });

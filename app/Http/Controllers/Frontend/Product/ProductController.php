@@ -26,7 +26,7 @@ use App\Models\Offer\Offer;
 
 use DB;
 
-use Session, Cart;
+use Session, Cart, Wishlist;
 
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Mailable;
@@ -587,9 +587,10 @@ class ProductController extends Controller
             if($userCheck == false)
             {
                 return response()->json([
+                    'success' => false,
                     'error' => true,
                     'redirect' => true,
-                    'message' => 'Login first to add to favourite.'
+                    'message' => 'Please login first to add product into Favourite list.'
                 ]);
             }
 
@@ -604,14 +605,20 @@ class ProductController extends Controller
                 {
                     $this->userFavourite->where('id', $check->id)->delete();
 
+                    $countOfFav = $this->userFavourite->where('user_id', Auth::user()->id)
+                                    ->join('products', 'products.id', '=', 'user_favourites.product_id')
+                                    ->count();
+
                     return response()->json([
                         'success' => true,
-                        'message' => 'Removed from Favourite List.'
+                        'message' => 'Product Successfully Removed from Favourite List.',
+                        'favCount' => $countOfFav
                     ]);
                 }
                 else
                 {
                     return response()->json([
+                        'success' => false,
                         'error' => true,
                         'message' => 'Add to Favourite List First.'
                     ]);
@@ -622,8 +629,9 @@ class ProductController extends Controller
                 if(!empty($check))
                 {
                     return response()->json([
+                        'success' => false,
                         'error' => true,
-                        'message' => 'Already Exist in Favourite List.'
+                        'message' => 'Product Already Exist in Favourite list.'
                     ]);
                 }
                 else
@@ -633,9 +641,14 @@ class ProductController extends Controller
                         'product_id'    => $postData['product_id']
                     ]);
 
+                    $countOfFav = $this->userFavourite->where('user_id', Auth::user()->id)
+                                    ->join('products', 'products.id', '=', 'user_favourites.product_id')
+                                    ->count();
+
                     return response()->json([
                         'success' => true,
-                        'message' => 'Successfully Added in Favourite List'
+                        'message' => 'Product Successfully added into Favourite list.',
+                        'favCount' => $countOfFav
                     ]);
                 }
             }
@@ -643,8 +656,9 @@ class ProductController extends Controller
         else
         {
             return response()->json([
-               'error' => true,
-               'message' => 'Error in Data'
+                'success' => false,
+                'error' => true,
+                'message' => 'Error in Data'
             ]);
         }
     }
@@ -656,7 +670,7 @@ class ProductController extends Controller
             return redirect()->route('frontend.index')->withFlashWarning("Login first to add products in favourite.");;
         }
 
-        $user = AUth::user();
+        $user = Auth::user();
 
         $categoryList   = $this->categories->getAll();
         $collectionList = $this->subcategories->getAll();

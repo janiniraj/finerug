@@ -98,3 +98,7 @@ Route::group(['namespace' => 'Checkout', 'as' => 'checkout.', 'prefix' => 'check
 Route::post('email-subscription', 'FrontendController@emailSubscription')->name('email-subscription');
 Route::post('mailing-submit', 'PageController@mailingSubmit')->name('page.mailing-submit');
 Route::get('coupons', 'PageController@coupons')->name('page.coupons');
+
+/*Route::group(['namespace' => 'Wishlist', 'as' => 'wishlist.', 'prefix' => 'wishlist'], function () {
+    Route::get('add/{product_id}', 'WishlistController@addToWishlist')->name('add');
+});*/

@@ -47,6 +47,7 @@ $cartCount = Cart::getTotalQuantity();
 								@endif
 							</li>
                         	<li class="list-inline-item"><a href=""><i class="far fa-user-circle"></i> <span>My Account</span></a></li>
+                            <li class="list-inline-item"><a href="{{ route('frontend.product.favourites') }}"><i class="fas fa-heart"></i> <span class="fav-count">{{ $helper->favouriteCount }}</span></a></li>
                             <li class="list-inline-item"><a href="{{ route('frontend.checkout.cart') }}"><i class="fas fa-shopping-cart"></i> <span class="count">{{ $cartCount }}</span></a></li>
                         </ul>	
                     </div>

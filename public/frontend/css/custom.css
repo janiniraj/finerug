@@ -462,3 +462,20 @@ body {
   background: #f9103f;
   color: #ffffff;
 }
+
+.list-inline-item .fav-count{
+    vertical-align: middle;
+    position: absolute;
+    width: 21px;
+    height: 21px;
+    font-size: 10px;
+    line-height: 21px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    top: 24px;
+    right: 69px;
+    text-align: center;
+    border-radius: 620px;
+    background: #f9103f;
+    color: #ffffff;
+}

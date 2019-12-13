@@ -114,7 +114,8 @@ class MenuHelper
             $userId             = Auth::user()->id;
             $productFavourite   = new UserFavourite();
 
-            $this->favouriteCount = $productFavourite->where('user_id', $userId)->count();
+            $this->favouriteCount = $productFavourite->where('user_id', $userId)
+                                        ->join('products', 'products.id', '=', 'user_favourites.product_id')->count();
         }
 
         $this->settings = Setting::get();
