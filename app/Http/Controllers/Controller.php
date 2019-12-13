@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Visitor\Visitor;
 use Carbon\Carbon;
+use App\Models\Activity\Activity;
 
 class Controller extends BaseController
 {
@@ -55,5 +56,22 @@ class Controller extends BaseController
 
     	return $visitorModel->where('updated_at', '>=', $timeToCompare)
     						->count();
+    }
+
+    /**
+     * @param null $userId
+     * @param null $productId
+     * @param $activity
+     * @return bool
+     */
+    public function createActivityLog($userId = null, $productId = null, $activity)
+    {
+        $this->activity = new Activity;
+        $this->activity->create([
+            'user_id' => $userId,
+            'product_id' => $productId,
+            'activity' => $activity
+        ]);
+        return true;
     }
 }

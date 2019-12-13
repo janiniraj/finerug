@@ -26,7 +26,7 @@ use App\Models\Offer\Offer;
 
 use DB;
 
-use Session, Cart, Wishlist;
+use Session, Cart;
 
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Mailable;
@@ -644,6 +644,7 @@ class ProductController extends Controller
                     $countOfFav = $this->userFavourite->where('user_id', Auth::user()->id)
                                     ->join('products', 'products.id', '=', 'user_favourites.product_id')
                                     ->count();
+                    $this->createActivityLog(Auth::user()->id, $postData['product_id'], 'add_wishlist');
 
                     return response()->json([
                         'success' => true,
@@ -982,7 +983,7 @@ class ProductController extends Controller
                 'product_id' => $productData->id
         ));
         
-		//$this->createActivityLog(Auth::user()->id, $productData->id, 'add_cart');
+		$this->createActivityLog(Auth::user()->id, $productData->id, 'add_cart');
 		
         return response()->json([
             'success' => true,
