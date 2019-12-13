@@ -54,57 +54,75 @@ class RegisterController extends Controller
     {
         $postData = $request->all();
 
-        $success = true;
+        $arr = [
+            'g-recaptcha-response' => 'required|recaptcha'
+        ];
 
-        if($this->user->query()->where('email', $request->only('email'))->count() > 0)
-        {
-            $success = false;
-            $errorMessage[] = "User Already Exist With same Email.";
-        }
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'g-recaptcha-response' => 'required|recaptcha'
+        ], [
+            'g-recaptcha-response' => 'Captcha Does not match',
+        ]);
 
-        if($postData['password'] != $postData['password_confirmation'])
-        {
-            $success = false;
-            $errorMessage[] = "The password confirmation does not match.";
-        }
+        if($validator->fails()) {
+            return Response::json([
+                'success' => false,
+                'redirectPath' => false,
+                'error' => implode("<br/>", $validator->messages())
+            ]);
+        } else {
 
-        if($success == true)
-        {
-            if (config('access.users.confirm_email') || config('access.users.requires_approval')) {
-                $user = $this->user->create($request->only('first_name', 'last_name', 'email', 'password'));
-                event(new UserRegistered($user));
+            $success = true;
 
-                $response = [
-                    'success' => true,
-                    'redirectPath' => $this->redirectPath(),
-                    'error' => false,
-                    'message' => config('access.users.requires_approval') ?
-                        trans('exceptions.frontend.auth.confirmation.created_pending') :
-                        trans('exceptions.frontend.auth.confirmation.created_confirm')
-                ];
-                
-            } else {
-                access()->login($this->user->create($request->only('first_name', 'last_name', 'email', 'password')));
-                event(new UserRegistered(access()->user()));
-
-                $response = [
-                    'success' => true,
-                    'redirectPath' => $this->redirectPath(),
-                    'error' => false,
-                    'message' => 'Thank you for Account Creation.'
-                ];
+            if ($this->user->query()->where('email', $request->only('email'))->count() > 0) {
+                $success = false;
+                $errorMessage[] = "User Already Exist With same Email.";
             }
 
-            return Response::json($response);
+            if ($postData['password'] != $postData['password_confirmation']) {
+                $success = false;
+                $errorMessage[] = "The password confirmation does not match.";
+            }
+
+            if ($success == true) {
+                if (config('access.users.confirm_email') || config('access.users.requires_approval')) {
+                    $user = $this->user->create($request->only('first_name', 'last_name', 'email', 'password'));
+                    event(new UserRegistered($user));
+
+                    $response = [
+                        'success' => true,
+                        'redirectPath' => $this->redirectPath(),
+                        'error' => false,
+                        'message' => config('access.users.requires_approval') ?
+                            trans('exceptions.frontend.auth.confirmation.created_pending') :
+                            trans('exceptions.frontend.auth.confirmation.created_confirm')
+                    ];
+
+                } else {
+                    access()->login($this->user->create($request->only('first_name', 'last_name', 'email', 'password')));
+                    event(new UserRegistered(access()->user()));
+
+                    $response = [
+                        'success' => true,
+                        'redirectPath' => $this->redirectPath(),
+                        'error' => false,
+                        'message' => 'Thank you for Account Creation.'
+                    ];
+                }
+
+                return Response::json($response);
+            } else {
+                return Response::json([
+                    'success' => $success,
+                    'redirectPath' => false,
+                    'error' => implode("<br/>", $errorMessage)
+                ]);
+            }
         }
-        else
-        {
-            return Response::json([
-                'success' => $success,
-                'redirectPath' => false,
-                'error' => implode("<br/>", $errorMessage)
-            ]);
-        }        
     }
 
     public function register(RegisterRequest $request)

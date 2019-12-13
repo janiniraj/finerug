@@ -64,6 +64,13 @@
 										<input type="password" name="password_confirmation" id="password_confirmation" tabindex="2" class="form-control" placeholder="Confirm Password" required>
 									</div>
 									<div class="form-group">
+										@if(env('GOOGLE_RECAPTCHA_KEY'))
+											<div class="g-recaptcha"
+												 data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+											</div>
+										@endif
+									</div>
+									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
 												<input type="submit" name="register" id="register" tabindex="4" class="form-control btn btn-register" value="Register Now">
@@ -102,6 +109,7 @@
 @endsection
 
 @section('after-scripts')
+		 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
 $(function() {
 
