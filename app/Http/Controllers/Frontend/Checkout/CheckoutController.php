@@ -939,6 +939,8 @@ class CheckoutController extends Controller
             }
         }
 
+        $this->beforePaymentOrder();
+
         $cartData = Cart::session($cartId);
 
         $provider = new ExpressCheckout;
@@ -1049,6 +1051,12 @@ class CheckoutController extends Controller
     public function afterPayment(Request $request)
     {
         dd($request->all());
+        $orderId = Session::get('orderId');
+
+        Order::where('id', $orderId)->update(array('status' => 'payment success'));
+        Cart::clear();
+
+        return redirect()->route('frontend.index')->withFlashSuccess("Payment Successful.");
     }
 
     public function overview()
