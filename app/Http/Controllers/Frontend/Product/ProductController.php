@@ -972,7 +972,12 @@ class ProductController extends Controller
             $price = $sizeData->price;
         } */
 
-	$price = $productData->price;
+	    $price = $productData->price;
+
+        if(Auth::check())
+        {
+            $price = $productData->price_affiliate;
+        }
     
         $finalPrice = number_format($sizeData->width*$sizeData->length*$price, 2, '.', '');
         //dd($finalPrice);
