@@ -20,6 +20,21 @@ use Srmklive\PayPal\Services\AdaptivePayments;
 use Stripe\Error\Card;
 use Stripe;
 
+/** All Paypal Details class **/
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\Item;
+use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
+use PayPal\Api\Payment;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\PaymentExecution;
+use PayPal\Api\Transaction;
+use Config;
+
 
 
 /**
@@ -919,6 +934,219 @@ class CheckoutController extends Controller
         
     }
 
+    public function beforePaypalPayment(Request $request)
+    {
+        if(Auth::check())
+        {
+            $cartId = Auth::user()->id;
+        }
+        else
+        {
+            if(Session::has('cartSessionId'))
+            {
+                $cartId = Session::get('cartSessionId');
+            }
+            else
+            {
+                $cartId = rand(0,9999);
+                session(['cartSessionId' => $cartId]);
+            }
+        }
+
+        //$this->beforePaymentOrder();
+
+        $paypalData = $this->getPaypalData($cartId);
+
+        //dd($paypalData);
+
+        /** setup PayPal api context **/
+        $paypalConf = Config::get('paypal');
+        $this->_api_context = new ApiContext(new OAuthTokenCredential($paypalConf['client_id'], $paypalConf['secret']));
+        $this->_api_context->setConfig($paypalConf['settings']);
+
+        $payer = new Payer();
+        $payer->setPaymentMethod('paypal');
+
+        $itemsArray = [];
+
+        foreach($paypalData['items'] as $singleKey => $singleValue)
+        {
+            $itemObj = new Item();
+
+            $itemObj->setName($singleValue['name'])
+                    ->setCurrency('USD')
+                    ->setQuantity($singleValue['qty'])
+                    ->setPrice($singleValue['price'])
+                    ->setDescription(isset($singleValue['description']) ? $singleValue['description'] : '');
+
+            $itemsArray[] =  $itemObj;
+        }
+
+        $itemList = new ItemList();
+        $itemList->setItems($itemsArray);
+
+        $amount = new Amount();
+        $amount->setCurrency('USD')
+                ->setTotal($paypalData['total']);
+
+        $transaction = new Transaction();
+        $transaction->setAmount($amount)
+            ->setItemList($itemList)
+            ->setDescription('Order Number: ');
+
+        $redirectUrls = new RedirectUrls();
+        $redirectUrls->setReturnUrl($paypalData['return_url']) /** Specify return URL **/
+        ->setCancelUrl($paypalData['cancel_url']);
+
+        $payment = new Payment();
+        $payment->setIntent('Sale')
+            ->setPayer($payer)
+            ->setRedirectUrls($redirectUrls)
+            ->setTransactions(array($transaction));
+
+        dd($payment->create($this->_api_context));exit;
+
+        /** dd($payment->create($this->_api_context));exit; **/
+
+        try
+        {
+            $payment->create($this->_api_context);
+        }
+        catch (\PayPal\Exception\PPConnectionException $ex)
+        {
+            dd("in catch");
+            if (\Config::get('app.debug'))
+            {
+                return redirect()->route('frontend.checkout.cart')->withFlashWarning("Error in Checkout with Paypal, Connection Timeout.");
+            }
+            else
+            {
+                return redirect()->route('frontend.checkout.cart')->withFlashWarning("Error in Checkout with Paypal, sorry for inconvenience.");
+            }
+        }
+
+        foreach($payment->getLinks() as $link)
+        {
+            if($link->getRel() == 'approval_url')
+            {
+                $redirectUrl = $link->getHref();
+                break;
+            }
+        }
+
+        /** add payment ID to session **/
+        Session::put('paypal_payment_id', $payment->getId());
+
+        if(isset($redirectUrl)) {
+            /** redirect to paypal **/
+            return Redirect::away($redirectUrl);
+        }
+
+        return redirect()->route('frontend.checkout.cart')->withFlashWarning("Error in Checkout with Paypal, Unknown error occurred.");
+
+        dd("end of function");
+
+    }
+
+
+
+    public function getPaypalData($cartId)
+    {
+        $cartData = Cart::session($cartId);
+
+        $data = [];
+
+        foreach($cartData->getContent() as $singleKey => $singleValue)
+        {
+            $productData = $this->productRepository->find($singleValue->attributes->product_id);
+
+            $data['items'][] = [
+                'name' => $singleValue->name,
+                'price' => $singleValue->price,
+                'qty' => $singleValue->quantity,
+                'description' => "Size:". $singleValue->attributes->size . ", Id:". $singleValue->attributes->product_id . ", SizeId:" . $singleValue->attributes->size_id
+            ];
+        }
+
+        $data['invoice_id']             = 1;
+        $data['invoice_description']    = "Order #{$data['invoice_id']} Invoice";
+        $data['return_url']             = url('/payment/success');
+        $data['cancel_url']             = url('/cart');
+
+        $total = 0;
+        foreach($data['items'] as $item)
+        {
+            $total += $item['price']*$item['qty'];
+        }
+
+        $checkCartCondition = $cartData->getConditionsByType('promo');
+
+        if($checkCartCondition->count() > 0)
+        {
+            $promoData  = $checkCartCondition->first();
+
+            $promoName  = $promoData->getName();
+            $promoVal   = $promoData->getValue();
+
+            $promoObjData = $this->promo->where('code', $promoName)->first();
+
+            if($promoObjData->type == 'percentage')
+            {
+                $promoPriceVal = round(($promoObjData->discount / 100) * $total, 2);
+            }
+            else
+            {
+                $promoPriceVal = $promoObjData->discount;
+            }
+
+            $data['items'][] = [
+                'name' => 'Discount',
+                'price' => '-'.$promoPriceVal,
+                'qty' => 1
+            ];
+
+            $total = $total - $promoPriceVal;
+        }
+
+        $shippingCondition = $cartData->getConditionsByType('coupon');
+
+        if($shippingCondition->count() > 0)
+        {
+            foreach($shippingCondition as $getCondition){
+                $priceShipping      = (float)str_replace('+', '', $getCondition->getValue());
+
+                $data['items'][] = [
+                    'name' => $getCondition->getName(),
+                    'price' => $priceShipping,
+                    'qty' => 1
+                ];
+
+                $total = $total+ $priceShipping;
+            }
+            $shippingData       = $shippingCondition->first();
+            $priceShipping      = (float)str_replace('+', '', $shippingData->getValue());
+
+            $data['items'][] = [
+                'name' => 'Shipping',
+                'price' => $priceShipping,
+                'qty' => 1
+            ];
+
+            $total = $total+ $priceShipping;
+        }
+
+        $data['total'] = $total;
+
+        return $data;
+    }
+
+
+
+
+
+
+
+
     public function beforePayment(Request $request)
     {
 
@@ -965,7 +1193,7 @@ class CheckoutController extends Controller
         $data['cancel_url']             = url('/cart');
 
         $total = 0;
-        foreach($data['items'] as $item) 
+        foreach($data['items'] as $item)
         {
             $total += $item['price']*$item['qty'];
         }
@@ -997,7 +1225,7 @@ class CheckoutController extends Controller
                                 ];
 
             $total = $total - $promoPriceVal;
-        }  
+        }
 
         $shippingCondition = $cartData->getConditionsByType('coupon');
 
@@ -1024,7 +1252,7 @@ class CheckoutController extends Controller
                                 ];
 
             $total = $total+ $priceShipping;
-        } 
+        }
 
         $data['total'] = $total;
 

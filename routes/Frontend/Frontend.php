@@ -88,8 +88,9 @@ Route::group(['namespace' => 'Checkout', 'as' => 'checkout.', 'prefix' => 'check
     Route::post('add_guest_address', 'CheckoutController@AddGuestAddress')->name('add_guest_address');
     Route::post('apply-promo', 'CheckoutController@applyPromo')->name('apply-promo');
     Route::get('remove-promo', 'CheckoutController@removePromo')->name('remove-promo');
-    Route::get('before-payment', 'CheckoutController@beforePayment')->name('before-payment');
+    Route::get('before-payment', 'CheckoutController@beforePaypalPayment')->name('before-payment');
     Route::get('payment/success', 'CheckoutController@afterPayment')->name('after-payment');
+    Route::get('payment/status', 'CheckoutController@getPaymentStatus')->name('after-payment-status');
     Route::get('overview', 'CheckoutController@overview')->name('overview');
     //Route::get('addmoney/stripe', array('as' => 'addmoney.paystripe','uses' => 'CheckoutController@PaymentStripe'));
     Route::post('stripe', array('as' => 'stripe','uses' => 'CheckoutController@postPaymentStripe'));
