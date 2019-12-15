@@ -1065,7 +1065,7 @@ class CheckoutController extends Controller
         $data['invoice_id']             = $orderId;
         $data['invoice_description']    = "Order #{$data['invoice_id']} Invoice";
         $data['return_url']             = url('/payment/success');
-        $data['cancel_url']             = url('/cart');
+        $data['cancel_url']             = url('/checkout/cart');
 
         $total = 0;
         foreach($data['items'] as $item)
