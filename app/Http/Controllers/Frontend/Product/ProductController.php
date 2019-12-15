@@ -907,7 +907,7 @@ class ProductController extends Controller
         
         /* $sizeName = $explodedLength[0]."'".(isset($explodedLength[1]) ? $explodedLength[1]."''" : ""). ' x '. $explodedWidth[0]."'".(isset($explodedWidth[1]) ? $explodedWidth[1]."''" : ""); */
 
-        
+
         //return response()->json([
          //   'success' => true,
           //  'message' => ''.$sizeName
@@ -977,12 +977,7 @@ class ProductController extends Controller
             $price = $sizeData->price;
         } */
 
-	    $price = $productData->price;
-
-        if(Auth::check())
-        {
-            $price = $productData->price_affiliate < $productData->price ? $productData->price_affiliate : $productData->price;
-        }
+        $price = $productData->price_affiliate < $productData->price ? $productData->price_affiliate : $productData->price;
     
         $finalPrice = number_format($sizeData->width*$sizeData->length*$price, 2, '.', '');
         //dd($finalPrice);
