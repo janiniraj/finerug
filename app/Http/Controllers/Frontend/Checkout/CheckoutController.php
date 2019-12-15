@@ -1270,6 +1270,10 @@ class CheckoutController extends Controller
 
         Order::where('id', $orderId)->update(array('status' => 'payment success'));
         Cart::clear();
+        if(Auth::check())
+        {
+            Cart::session(Auth::user()->id)->clear();
+        }
 
         /** Get the payment ID before session clear **/
         $payment_id = Session::get('paypal_payment_id');
@@ -1450,6 +1454,10 @@ class CheckoutController extends Controller
                 if($charge['status'] == 'succeeded') {
                     Order::where('id', $orderId)->update(array('status' => 'payment success'));
                     Cart::clear();
+                    if(Auth::check())
+                    {
+                        Cart::session(Auth::user()->id)->clear();
+                    }
 
                     return redirect()->route('frontend.index')->withFlashSuccess("Payment Successful.");
                 } else {
