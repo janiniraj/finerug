@@ -976,7 +976,7 @@ class ProductController extends Controller
 
         if(Auth::check())
         {
-            $price = $productData->price_affiliate;
+            $price = $productData->price_affiliate < $productData->price ? $productData->price_affiliate : $productData->price;
         }
     
         $finalPrice = number_format($sizeData->width*$sizeData->length*$price, 2, '.', '');
