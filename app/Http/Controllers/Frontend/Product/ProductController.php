@@ -907,6 +907,7 @@ class ProductController extends Controller
         
         /* $sizeName = $explodedLength[0]."'".(isset($explodedLength[1]) ? $explodedLength[1]."''" : ""). ' x '. $explodedWidth[0]."'".(isset($explodedWidth[1]) ? $explodedWidth[1]."''" : ""); */
 
+        
         //return response()->json([
          //   'success' => true,
           //  'message' => ''.$sizeName
