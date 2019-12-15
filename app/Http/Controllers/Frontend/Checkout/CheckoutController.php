@@ -953,7 +953,7 @@ class CheckoutController extends Controller
             }
         }
 
-        //$this->beforePaymentOrder();
+        $this->beforePaymentOrder();
 
         $paypalData = $this->getPaypalData($cartId);
 
@@ -1004,8 +1004,6 @@ class CheckoutController extends Controller
             ->setRedirectUrls($redirectUrls)
             ->setTransactions(array($transaction));
 
-        dd($payment->create($this->_api_context));exit;
-
         /** dd($payment->create($this->_api_context));exit; **/
 
         try
@@ -1044,22 +1042,18 @@ class CheckoutController extends Controller
 
         return redirect()->route('frontend.checkout.cart')->withFlashWarning("Error in Checkout with Paypal, Unknown error occurred.");
 
-        dd("end of function");
-
     }
-
 
 
     public function getPaypalData($cartId)
     {
         $cartData = Cart::session($cartId);
+        $orderId = Session::get('orderId');
 
         $data = [];
 
         foreach($cartData->getContent() as $singleKey => $singleValue)
         {
-            $productData = $this->productRepository->find($singleValue->attributes->product_id);
-
             $data['items'][] = [
                 'name' => $singleValue->name,
                 'price' => $singleValue->price,
@@ -1068,7 +1062,7 @@ class CheckoutController extends Controller
             ];
         }
 
-        $data['invoice_id']             = 1;
+        $data['invoice_id']             = $orderId;
         $data['invoice_description']    = "Order #{$data['invoice_id']} Invoice";
         $data['return_url']             = url('/payment/success');
         $data['cancel_url']             = url('/cart');
@@ -1140,13 +1134,7 @@ class CheckoutController extends Controller
         return $data;
     }
 
-
-
-
-
-
-
-
+    /* Not Being Used now */
     public function beforePayment(Request $request)
     {
 
@@ -1278,13 +1266,37 @@ class CheckoutController extends Controller
 
     public function afterPayment(Request $request)
     {
-        dd($request->all());
         $orderId = Session::get('orderId');
 
         Order::where('id', $orderId)->update(array('status' => 'payment success'));
         Cart::clear();
 
-        return redirect()->route('frontend.index')->withFlashSuccess("Payment Successful.");
+        /** Get the payment ID before session clear **/
+        $payment_id = Session::get('paypal_payment_id');
+        /** clear the session payment ID **/
+        Session::forget('paypal_payment_id');
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+            return redirect()->route('frontend.index')->withFlashWarning("Payment Failed with Paypal.");
+        }
+        $payment = Payment::get($payment_id, $this->_api_context);
+        /** PaymentExecution object includes information necessary **/
+        /** to execute a PayPal account payment. **/
+        /** The payer_id is added to the request query parameters **/
+        /** when the user is redirected from paypal back to your site **/
+        $execution = new PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+        /**Execute the payment **/
+        $result = $payment->execute($execution, $this->_api_context);
+        /** dd($result);exit; /** DEBUG RESULT, remove it later **/
+        if ($result->getState() == 'approved') {
+
+            /** it's all right **/
+            /** Here Write your database logic like that insert record or value in database if you want **/
+
+            return redirect()->route('frontend.index')->withFlashSuccess("Payment Successful.");
+        }
+
+        return redirect()->route('frontend.index')->withFlashWarning("Payment Failed with Paypal.");
     }
 
     public function overview()
