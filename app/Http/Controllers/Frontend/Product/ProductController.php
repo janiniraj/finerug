@@ -899,7 +899,11 @@ class ProductController extends Controller
 
         if(isset($explodedWidth[1])) {
             $sizeName = $sizeName.$explodedWidth[1]."''";
-        } 
+        }
+
+        $tempsizeArr = explode('x', $sizeName);
+
+        $sizeName = implode('x', array_reverse($tempsizeArr));
         
         /* $sizeName = $explodedLength[0]."'".(isset($explodedLength[1]) ? $explodedLength[1]."''" : ""). ' x '. $explodedWidth[0]."'".(isset($explodedWidth[1]) ? $explodedWidth[1]."''" : ""); */
 
