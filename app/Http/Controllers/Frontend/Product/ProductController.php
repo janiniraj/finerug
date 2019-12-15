@@ -987,8 +987,11 @@ class ProductController extends Controller
                 'size_id'   => $sizeData->id,
                 'product_id' => $productData->id
         ));
-        
-		$this->createActivityLog(Auth::user()->id, $productData->id, 'add_cart');
+
+        if(Auth::check()) {
+
+            $this->createActivityLog(Auth::user()->id, $productData->id, 'add_cart');
+        }
 		
         return response()->json([
             'success' => true,
