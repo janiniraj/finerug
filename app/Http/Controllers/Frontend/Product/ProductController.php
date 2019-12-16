@@ -239,6 +239,27 @@ class ProductController extends Controller
         $sizeParam          = clone $productsAll;
         $discountParam      = clone $productsAll;
 
+        if(isset($filterData['sort']) && $filterData['sort'] == 'new_arrival')
+        {
+            $products   = $products->orderBy('products.created_at', 'DESC');
+        }
+        elseif (isset($filterData['sort']) && $filterData['sort'] == 'name_asc')
+        {
+            $products   = $products->orderBy('products.name', 'ASC');
+        }
+        elseif (isset($filterData['sort']) && $filterData['sort'] == 'name_desc')
+        {
+            $products   = $products->orderBy('products.name', 'DESC');
+        }
+        elseif (isset($filterData['sort']) && $filterData['sort'] == 'price_asc')
+        {
+            $products   = $products->orderBy('products.price', 'ASC');
+        }
+        elseif (isset($filterData['sort']) && $filterData['sort'] == 'price_desc')
+        {
+            $products   = $products->orderBy('products.price', 'DESC');
+        }
+
         $products   = $products->paginate(config('constant.perPage'));
 		/*
 		$laQuery = DB::getQueryLog();

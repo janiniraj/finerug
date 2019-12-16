@@ -68,17 +68,19 @@ if(isset($_GET['price_range'])){
                             <span class="d-none d-sm-inline-block">Page  1 - 20</span>
                         </div>
                         <div class="col-6">
-                        	<form class="form-inline justify-content-end">
+                            {{ Form::open(['method' => 'GET','id'=> 'sortForm','name'=> 'sortForm', 'class' => 'form-inline justify-content-end']) }}
                               <div class="form-group small">
                                 <label for="inputPassword6" class="d-none d-sm-inline-block">Sort By</label>
-                                <select class="custom-select custom-select-sm ml-sm-3">
-                                  <option selected>Best Selling</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                <select name="sort" class="custom-select custom-select-sm ml-sm-3 sort-select">
+                                  <option {{ (!isset($filterData['sort']) || (isset($filterData['sort']) && $filterData['sort'] == 'best_selling')) ? 'selected' : '' }} value="best_selling">Best Selling</option>
+                                  <option {{ (isset($filterData['sort']) && $filterData['sort'] == 'new_arrival') ? 'selected' : '' }} value="new_arrival">New Arrival</option>
+                                  <option {{ (isset($filterData['sort']) && $filterData['sort'] == 'name_asc') ? 'selected' : '' }} value="name_asc">Name(A-Z)</option>
+                                  <option {{ (isset($filterData['sort']) && $filterData['sort'] == 'name_desc') ? 'selected' : '' }} value="name_desc">Name(Z-A)</option>
+                                  <option {{ (isset($filterData['sort']) && $filterData['sort'] == 'price_asc') ? 'selected' : '' }} value="price_asc">Price (Low to High)</option>
+                                  <option {{ (isset($filterData['sort']) && $filterData['sort'] == 'price_desc') ? 'selected' : '' }} value="price_desc">Price (High to Low)</option>
                                 </select>
                               </div>
-                            </form>
+                            {{ Form::close() }}
                         </div>
                     </div>
                 </div>
@@ -325,6 +327,10 @@ if(isset($_GET['price_range'])){
 	$("#price_range").on('change', function (e) {
 		$("#filterForm").submit();
 	});
+	
+	$(".sort-select").on('change', function () {
+        $("#sortForm").submit();
+    });
 	
     var elt = $('#filter_display');
     $('#filter_display').tagsinput({
