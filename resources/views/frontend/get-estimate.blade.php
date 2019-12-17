@@ -66,6 +66,15 @@
                         </div><!--col-md-6-->
                     </div><!--form-group-->
 
+                    @if (config('access.captcha.registration'))
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                {!! Form::captcha() !!}
+                                {{ Form::hidden('captcha_status', 'true') }}
+                            </div><!--col-md-6-->
+                        </div><!--form-group-->
+                    @endif
+
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             {{ Form::submit(trans('labels.frontend.contact.button'), ['class' => 'btn btn-primary pull-right']) }}
@@ -83,6 +92,9 @@
 @endsection
 
 @section('after-scripts')
+    @if (config('access.captcha.registration'))
+        {!! Captcha::script() !!}
+    @endif
     <script>
         $( "#datepicker" ).datepicker();
     </script>
