@@ -40,7 +40,15 @@ class ContactController extends Controller
 
     public function getEstimate()
     {
-        return view('frontend.get-estimate');
+        $this->pageController = new PageController();
+
+        $pageData = $this->pageController->page->getPageBySlug('get-estimate');
+
+        $content = $this->pageController->getSliderContent('get-estimate', $pageData);
+
+        return view('frontend.get-estimate')->with([
+            'content'   => isset($content) ? $content : ""
+        ]);
     }
 
     public function sendEstimate(SendContactRequest $request)

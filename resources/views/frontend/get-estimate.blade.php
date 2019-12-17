@@ -3,7 +3,17 @@
 @section('title', app_name() . ' | Contact Us')
 
 @section('content')
-    <div class="row" style=" margin-top: 20px;">
+<style>
+    #about-us {
+        padding: 40px 0;
+        font-size: 20px;
+    }
+    .panel-heading {
+        font-size: 20px;
+    }
+</style>
+    {!! $content !!}
+    <div id="contact-form" class="row" style=" margin-top: 20px;">
 
         <div class="col-md-8 col-md-offset-2">
 
@@ -36,6 +46,20 @@
                     </div><!--form-group-->
 
                     <div class="form-group">
+                        {{ Form::label('location', 'Pickup Location', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            {{ Form::text('location', null, ['class' => 'form-control', 'placeholder' => 'Pickup Location']) }}
+                        </div><!--col-md-6-->
+                    </div><!--form-group-->
+
+                    <div class="form-group">
+                        {{ Form::label('date', 'Pickup Date', ['class' => 'col-md-4 control-label']) }}
+                        <div class="col-md-6">
+                            {{ Form::text('date', null, ['class' => 'form-control', 'id' => 'datepicker', 'placeholder' => 'Pickup Date']) }}
+                        </div><!--col-md-6-->
+                    </div><!--form-group-->
+
+                    <div class="form-group">
                         {{ Form::label('message', trans('validation.attributes.frontend.message'), ['class' => 'col-md-4 control-label']) }}
                         <div class="col-md-6">
                             {{ Form::textarea('message', null, ['class' => 'form-control', 'required' => 'required', 'placeholder' => trans('validation.attributes.frontend.message')]) }}
@@ -56,4 +80,10 @@
         </div><!-- col-md-8 -->
 
     </div><!-- row -->
+@endsection
+
+@section('after-scripts')
+    <script>
+        $( "#datepicker" ).datepicker();
+    </script>
 @endsection
