@@ -82,6 +82,11 @@ class ProductController extends Controller
             return Redirect::to('products/'.$categoryName.'?'.$appendData);
         }
 
+        if(isset($filterData['size']) && $filterData['size'])
+        {
+            $filterData['sizes'][0] = $filterData['size'];
+        }
+
         $categoryData = [];
         if($categoryName)
         {
