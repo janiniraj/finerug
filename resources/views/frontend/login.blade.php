@@ -115,6 +115,10 @@ $(function() {
 
 	$("#register-form").submit(function (e) {
 		e.preventDefault();
+		if (grecaptcha.getResponse() == "") {
+			alert("Please verify captcha details.");
+			return false;
+		}
 		$.ajax({
 			url:      $("#register-form").attr('action'),
 			type:     $("#register-form").attr('method'),

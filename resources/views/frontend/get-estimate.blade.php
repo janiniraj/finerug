@@ -66,14 +66,13 @@
                         </div><!--col-md-6-->
                     </div><!--form-group-->
 
-                    @if (config('access.captcha.registration'))
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                {!! Form::captcha() !!}
-                                {{ Form::hidden('captcha_status', 'true') }}
-                            </div><!--col-md-6-->
-                        </div><!--form-group-->
-                    @endif
+                    <div class="form-group">
+                        @if(env('GOOGLE_RECAPTCHA_KEY'))
+                            <div class="g-recaptcha"
+                                 data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+                            </div>
+                        @endif
+                    </div><!--form-group-->
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
@@ -92,9 +91,7 @@
 @endsection
 
 @section('after-scripts')
-    @if (config('access.captcha.registration'))
-        {!! Captcha::script() !!}
-    @endif
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
         $( "#datepicker" ).datepicker();
     </script>
