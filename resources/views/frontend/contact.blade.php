@@ -43,11 +43,14 @@
                     </div><!--form-group-->
 
                     <div class="form-group">
-                        @if(env('GOOGLE_RECAPTCHA_KEY'))
-                            <div class="g-recaptcha"
-                                 data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
-                            </div>
-                        @endif
+                        <div class="col-md-4"></div>
+                        <div class="col-md-6">
+                            @if(env('GOOGLE_RECAPTCHA_KEY'))
+                                <div class="g-recaptcha"
+                                     data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+                                </div>
+                            @endif
+                        </div>
                     </div><!--form-group-->
 
                     <div class="form-group">
