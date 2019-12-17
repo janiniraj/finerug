@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Requests\Frontend\Auth\RegisterRequest;
 use App\Repositories\Frontend\Access\User\UserRepository;
 use Illuminate\Http\Request;
-use Response;
+use Response, Validator;
 
 /**
  * Class RegisterController.
