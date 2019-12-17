@@ -24,8 +24,8 @@ $helper = new MenuHelper();
                             	<li><a href="#">Area Rugs</a></li>
                                 <li><a href="http://localhost/php/category.php">Collections</a></li>
                                 <li><a href="#">Pad</a></li>
-                                <li><a href="#">Services </a></li>
-                                <li><a href="#">Repair </a></li>
+                                <li><a href="{{ route('frontend.page.terms-conditions') }}">Services </a></li>
+                                <li><a href="{{ route('frontend.page.return-policy') }}">Repair </a></li>
                             </ul>
                         </div>
                         <div class="col-xl-2 col-md-4">
@@ -66,7 +66,7 @@ $helper = new MenuHelper();
                         	<h2>Contacts</h2>
                             <ul class="list-unstyled m-0 pb-3">
                             	<li><a href="#">Shipping Information</a></li>
-                                <li><a href="#">Return Policy</a></li>
+                                <li><a href="{{ route('frontend.page.return-policy') }}">Return Policy</a></li>
                                 <li><a href="#">Catalogues</a></li>
                             </ul>
                         </div>
@@ -87,7 +87,7 @@ $helper = new MenuHelper();
                     <div class="col-md-6">
                     	<div class="text-md-right text-white copy-right">
                         	Noblemetric © 2019  All Rights Reserved<br>
-							<a href="#">Terms and Conditions</a>
+							<a href="{{ route('frontend.page.terms-conditions') }}">Terms and Conditions</a>
                         </div>
                     </div>
                 </div>
