@@ -119,76 +119,16 @@
 				</div>
               </div>
               <div class="tab-pane fade" id="shop_by_price" >
+                  {{ Form::open(['method' => 'GET','id'=> 'pricerange','name'=> 'pricerange', 'url' => route('frontend.product.product-by-type')]) }}
               	<div class="row">
-                	<div class=" col-md-3">
-                    	<div class="fade-grid">
-                        	<a href="#">
-                        		<figure><img src="/frontend/inc/img/Traditional-Rugs.jpg" alt=""/></figure>
-                                <h2>Traditional Rugs</h2>
-                            </a>
-                        </div>
+                    <div class="col-md-12">
+                        <input type="text" class="js-range-slider" name="price_range" id="price_range"  />
                     </div>
-                    <div class=" col-md-3">
-                    	<div class="fade-grid">
-                        	<a href="#">
-                        		<figure><img src="/frontend/inc/img/Modern-Rugs.jpg" alt=""/></figure>
-                                <h2>Modern Rugs</h2>
-                            </a>
-                        </div>
-                    </div>
-                    <div class=" col-md-6">
-                    	<div class="fade-grid">
-                        	<a href="#">
-                        		<figure><img src="/frontend/inc/img/All-rugs.jpg" alt=""/></figure>
-                                <h2>All rugs</h2>
-                            </a>
-                        </div>
+                    <div class="col-md-12 text-center padding">
+                        <input type="submit" class="btn btn-primary btn-lg" value="Shop">
                     </div>
                 </div>
-                <div class="row">
-                	<div class=" col-md-3">
-                    	<div class="fade-grid">
-                        	<a href="#">
-                        		<figure><img src="/frontend/inc/img/Carpet.jpg" alt=""/></figure>
-                                <h2>Carpet</h2>
-                            </a>
-                        </div>
-                    </div>
-                    <div class=" col-md-6">
-                    	<div class="fade-grid">
-                        	<a href="#">
-                        		<figure><img src="/frontend/inc/img/Hardwood.jpg" alt=""/></figure>
-                                <h2>Hardwood</h2>
-                            </a>
-                        </div>
-                    </div>
-                    <div class=" col-md-3">
-                    	<div class="fade-grid">
-                        	<a href="#">
-                        		<figure><img src="/frontend/inc/img/All-Flooring-products.jpg" alt=""/></figure>
-                                <h2>All Flooring products</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                	<div class=" col-md-6">
-                    	<div class="fade-grid">
-                        	<a href="#">
-                        		<figure><img src="/frontend/inc/img/Kitchen-Cabinet.jpg" alt=""/></figure>
-                                <h2>Kitchen Cabinet</h2>
-                            </a>
-                        </div>
-                    </div>
-                    <div class=" col-md-6">
-                    	<div class="fade-grid">
-                        	<a href="#">
-                        		<figure><img src="/frontend/inc/img/See-All--products.jpg" alt=""/></figure>
-                                <h2>See All  products</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                  {{ Form::close() }}
               </div>
               <div class="tab-pane fade" id="shop_by_colors" >
                   <div class="row">
@@ -419,4 +359,16 @@
 
     </div>
     */?>
+@endsection
+@section('after-scripts')
+<script>
+    $(".js-range-slider").ionRangeSlider({
+        type: "double",
+        min: 0,
+        max: 50000,
+        from: 0,
+        to: 50000,
+        grid: false
+    });
+</script>
 @endsection
