@@ -66,7 +66,8 @@
     </div><!-- row -->
 @endsection
 
-@section()
+@section('after-scripts')
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <script>
     $("#contactForm").submit(function () {
         if (grecaptcha.getResponse() == "") {
