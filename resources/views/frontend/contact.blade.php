@@ -12,7 +12,7 @@
 
                 <div class="panel-body">
 
-                    {{ Form::open(['route' => 'frontend.contact.send', 'class' => 'form-horizontal']) }}
+                    {{ Form::open(['route' => 'frontend.contact.send', 'class' => 'form-horizontal', 'id' => 'contactForm']) }}
 
                     <div class="form-group">
                         {{ Form::label('name', trans('validation.attributes.frontend.name'), ['class' => 'col-md-4 control-label']) }}
@@ -43,6 +43,14 @@
                     </div><!--form-group-->
 
                     <div class="form-group">
+                        @if(env('GOOGLE_RECAPTCHA_KEY'))
+                            <div class="g-recaptcha"
+                                 data-sitekey="{{env('GOOGLE_RECAPTCHA_KEY')}}">
+                            </div>
+                        @endif
+                    </div><!--form-group-->
+
+                    <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
                             {{ Form::submit(trans('labels.frontend.contact.button'), ['class' => 'btn btn-primary pull-right']) }}
                         </div><!--col-md-6-->
@@ -56,4 +64,16 @@
         </div><!-- col-md-8 -->
 
     </div><!-- row -->
+@endsection
+
+@section()
+<script>
+    $("#contactForm").submit(function () {
+        if (grecaptcha.getResponse() == "") {
+            alert("Please verify captcha details.");
+            return false;
+        }
+        return true;
+    });
+</script>
 @endsection

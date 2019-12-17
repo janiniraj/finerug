@@ -22,7 +22,7 @@
 
                 <div class="panel-body">
 
-                    {{ Form::open(['route' => 'frontend.contact.get-estimate.send', 'class' => 'form-horizontal']) }}
+                    {{ Form::open(['route' => 'frontend.contact.get-estimate.send', 'id' => 'getEstimateForm', 'class' => 'form-horizontal']) }}
 
                     <div class="form-group">
                         {{ Form::label('name', trans('validation.attributes.frontend.name'), ['class' => 'col-md-4 control-label']) }}
@@ -94,5 +94,12 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <script>
         $( "#datepicker" ).datepicker();
+        $("#getEstimateForm").submit(function () {
+            if (grecaptcha.getResponse() == "") {
+                alert("Please verify captcha details.");
+                return false;
+            }
+            return true;
+        });
     </script>
 @endsection
