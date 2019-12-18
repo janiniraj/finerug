@@ -106,7 +106,7 @@ Route::get('coupons', 'PageController@coupons')->name('page.coupons');
 /*Route::group(['namespace' => 'Wishlist', 'as' => 'wishlist.', 'prefix' => 'wishlist'], function () {
     Route::get('add/{product_id}', 'WishlistController@addToWishlist')->name('add');
 });*/
-Route::group(['namespace' => 'Account', 'as' => 'account.', 'prefix' => 'account'], function () {
+Route::group(['middleware' => 'auth', 'namespace' => 'Account', 'as' => 'account.', 'prefix' => 'account'], function () {
     Route::get('my-account', 'AccountController@myAccount')->name('my-account');
 });
 
