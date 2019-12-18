@@ -481,7 +481,7 @@ class ProductController extends Controller
                             $explodedWidth = explode(".", $width);
 
                             $size[] = $explodedLength[0]."'".(isset($explodedLength[1]) ? $explodedLength[1]."''" : ""). ' x '. $explodedWidth[0]."'".(isset($explodedWidth[1]) ? $explodedWidth[1]."''" : "");
-                            $designerPrice[] = $singleSize->price_affiliate;
+                            $designerPrice[] = $singleSize->price_affiliate*$length*$width;;
                             $consumerPrice[] = $singleSize->price*$length*$width;
                             $msrpPrice[] = $singleSize->price*$length*$width;
 							$quantity[] = $singleSize->quantity;

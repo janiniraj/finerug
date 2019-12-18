@@ -148,13 +148,13 @@ $cartCount = Cart::getTotalQuantity();
 
                                             <div class="col-lg-4">
                                                 <div class="sub-wrap">
-                                                    <h3>Exta 20% off</h3>
+                                                    <h3>Rug Pad</h3>
                                                     <ul class="list-unstyled m-0">
-                                                        <li><a href="https://finerugsdirect.com/products?type=rug&collection=41">Tabriz Collection</a></li>
-                                                        <li><a href="#">Kashan Collection</a></li>
-                                                        <li><a href="#">Oversized </a></li>
-                                                        <li><a href="#">Discontinued</a></li>
-                                                        <li><a href="#">Antique</a></li>
+                                                        <li><a href="#">First Option</a></li>
+                                                        <li><a href="#">Second Option</a></li>
+                                                        <li><a href="#">Third Option</a></li>
+                                                        <li><a href="#">Fourth Option</a></li>
+                                                        <li><a href="#">Fifth Option</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -162,11 +162,11 @@ $cartCount = Cart::getTotalQuantity();
                                     </div>
                                     <div class="col-lg-4">
                                     	<div class="menu-banner m-auto">
-                                        	<a href="https://finerugsdirect.com/products?type=rug&collection=100&color=&price_range=0%3B50000&style=&material=&brand=&discount=">
+                                        	<a href="#">
                                    	    	<img src="/frontend/inc/img/img01.jpg" alt=""/> 
                                             <div>
-                                                <h4>extra 40% off</h4>	
-                                                <p>Oversized Collection </p>
+                                                <h4>extra 30% off</h4>	
+                                                <p>Select </p>
                                             </div>
                                             </a>
                                         </div>	
