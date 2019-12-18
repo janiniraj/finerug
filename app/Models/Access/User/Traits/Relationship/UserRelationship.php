@@ -4,6 +4,8 @@ namespace App\Models\Access\User\Traits\Relationship;
 
 use App\Models\System\Session;
 use App\Models\Access\User\SocialLogin;
+use App\Models\UserAddress\UserAddress;
+use App\Models\Order\Order;
 
 /**
  * Class UserRelationship.
@@ -34,5 +36,15 @@ trait UserRelationship
     public function sessions()
     {
         return $this->hasMany(Session::class);
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(UserAddress::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }
