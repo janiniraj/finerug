@@ -273,15 +273,15 @@ class ProductController extends Controller
 		echo "</pre>";
 		*/
 
-        $categoryList = $categoryParam->join('categories', 'categories.id', '=', 'products.category_id')->select('categories.*')->groupBy('products.category_id')->get();
+        $categoryList = $categoryParam->join('categories', 'categories.id', '=', 'products.category_id')->select('categories.*')->groupBy('products.category_id')->orderBy('categories.category', 'ASC')->get();
 
-        $collectionList = $collectionParam->join('subcategories', 'subcategories.id', '=', 'products.subcategory_id')->select('subcategories.*')->groupBy('products.subcategory_id')->get();
+        $collectionList = $collectionParam->join('subcategories', 'subcategories.id', '=', 'products.subcategory_id')->select('subcategories.*')->groupBy('products.subcategory_id')->orderBy('subcategories.subcategory', 'ASC')->get();
 
-        $styleList = $styleParam->join('styles', 'styles.id', '=', 'products.style_id')->select('styles.*')->groupBy('products.style_id')->get();
+        $styleList = $styleParam->join('styles', 'styles.id', '=', 'products.style_id')->select('styles.*')->groupBy('products.style_id')->orderBy('styles.name','ASC')->get();
 
-        $materialList = $materialParam->join('materials', 'materials.id', '=', 'products.material_id')->select('materials.*')->groupBy('products.material_id')->get();
+        $materialList = $materialParam->join('materials', 'materials.id', '=', 'products.material_id')->select('materials.*')->groupBy('products.material_id')->orderBy('materials.name','ASC')->get();
 
-        $weaveList = $weaveParam->join('weaves', 'weaves.id', '=', 'products.weave_id')->select('weaves.*')->groupBy('products.weave_id')->get();
+        $weaveList = $weaveParam->join('weaves', 'weaves.id', '=', 'products.weave_id')->select('weaves.*')->groupBy('products.weave_id')->orderBy('weaves.name','ASC')->get();
 
 		$colorList = $colorParam->join('product_colors', 'product_colors.product_id', '=', 'products.id')->join('colors','colors.id','=','product_colors.color_id')->select('colors.*')->groupBy('colors.id')->get();
 

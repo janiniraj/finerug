@@ -488,3 +488,7 @@ height: 200px;
 .promo-card .card-name {
   font-size: 14px;
 }
+
+.main-page-container {
+  padding: 20px;
+}
