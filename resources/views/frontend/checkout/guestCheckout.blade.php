@@ -429,7 +429,20 @@
                     </div>
                     <div class="row paypal-container" style="display: none;">
                         <div class="col-md-12">
-                            <a href="{{ route('frontend.checkout.before-payment') }}" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 7rem !important;">Proceed to Paypal</a>
+                            <?php /*<a href="{{ route('frontend.checkout.before-payment') }}" class="btn btn-primary btn-lg btn-block" style="margin-bottom: 7rem !important;">Proceed to Paypal</a>*/ ?>
+                            <!-- PayPal Logo --><table border="0" cellpadding="10" cellspacing="0" align="center">
+                                <tr>
+                                    <td align="center">
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center">
+                                        <a href="{{ route('frontend.checkout.before-payment') }}" title="How PayPal Works"><img src="https://www.paypalobjects.com/webstatic/en_AU/i/buttons/btn_paywith_primary_l.png" alt="Pay with PayPal" />
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table><!-- PayPal Logo -->
                         </div>
                     </div>
                     <hr class="mb-4">
