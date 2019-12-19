@@ -10,6 +10,7 @@ use App\Repositories\Backend\Product\ProductRepository;
 use Illuminate\Http\Request;
 use App\Repositories\Backend\Subscription\SubscriptionRepository;
 use App\Repositories\Backend\Color\ColorRepository;
+use Cookie;
 
 /**
  * Class FrontendController.

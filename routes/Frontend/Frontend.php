@@ -110,3 +110,5 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Account', 'as' => 'account
     Route::get('my-account', 'AccountController@myAccount')->name('my-account');
 });
 
+Route::get('visitor', 'PageController@visitor')->name('page.visitor');
+

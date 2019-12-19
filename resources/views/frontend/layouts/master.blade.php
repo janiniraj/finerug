@@ -151,7 +151,14 @@
 			.append('<a>'+ item.value+'</a>')
 			.append(item.price)
 			.appendTo(ul);
-			}; 
+			};
+        $.ajax({
+            url:"<?php echo url('/'); ?>"+"/visitor",
+            type: "GET",
+            success: function(){
+
+            }
+        });
     </script>
 @yield('after-scripts')
 </body>
