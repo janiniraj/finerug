@@ -95,9 +95,12 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 quantity-select-container">
                                         <select class="custom-select mb-3" id="quantity" name="quantity">
                                         </select>
+                                    </div>
+                                    <div class="col-md-6 sold-out-container" style="display: none;">
+                                        <h4><label class="label label-danger">Sold Out</label></h4>
                                     </div>
                                 </div>
                             </form>
@@ -489,11 +492,24 @@ $(document).ready(function() {
 			url: "<?php echo url('/') ?>"+"/product/getQuantity/"+$proid+"/"+$sizeid,
 			type:'GET',
 			success:function(data) {
-				for (i = 1; i <= data['quantity']; i++) {
-				  html+="<option value='"+i+"'>"+i+"</option>";
-				}
-				//alert(html);
-				$('#quantity').empty().html(html);
+			    if(data['quantity'] == 0)
+                {
+                    $(".quantity-select-container").hide();
+                    $(".sold-out-container").show();
+                    $("#add_to_cart").hide();
+                }
+			    else
+                {
+                    $(".quantity-select-container").show();
+                    $(".sold-out-container").hide();
+                    $("#add_to_cart").show();
+
+                    for (i = 1; i <= data['quantity']; i++) {
+                        html+="<option value='"+i+"'>"+i+"</option>";
+                    }
+                    //alert(html);
+                    $('#quantity').empty().html(html);
+                }
 			}
 		});
 	}
