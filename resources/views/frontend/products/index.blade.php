@@ -245,6 +245,17 @@ if(isset($_GET['price_range'])){
                 	<div class="row">
 						@if(count($products))
 							@foreach($products as $product)
+                                @php
+                                    $isSoldOut = 1;
+
+                                    foreach ($product->size as $single)
+                                    {
+                                        if($single->quantity > 0)
+                                        {
+                                            $isSoldOut = 0;
+                                        }
+                                    }
+                                @endphp
 							<div class="col-xl-3 col-md-4 col-sm-6 item">
 								<div class="pro-grid sale_on favourite_on">
 									<figure>
@@ -258,6 +269,9 @@ if(isset($_GET['price_range'])){
 										<?php } ?>
 										</a>
 										<a href="{{ route('frontend.product.show', $product->id) }}" class="quick-view-btn btn btn-sm btn-danger">Quick View</a>
+                                        @if($isSoldOut == 1)
+                                            <a class="sold_out" href="#">Sold out</a>
+                                        @endif
 									</figure>
 									<div class="gird-price"><sub>USD</sub> {{$product->price}} </div>
 									<p class="grid-info"><a href="{{ route('frontend.product.show', $product->id) }}">{{$product->name}}</a></p>
