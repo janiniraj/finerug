@@ -592,7 +592,7 @@ class CheckoutController extends Controller
                 }
 
                 // Tax Start
-                try
+                /*try
                 {
                     //Calculate Taxes
                     $client = \TaxJar\Client::withApiKey(env('TAXJAR_API_KEY'));
@@ -634,7 +634,9 @@ class CheckoutController extends Controller
                     return response()->json([
                         'error' => "Error in State and Zipcode validation."
                     ]);
-                }
+                }*/
+
+                $tax = 0.00;
                 // Tax End
 
                 $condition = new CartCondition(array(
