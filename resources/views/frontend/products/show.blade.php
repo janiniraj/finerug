@@ -65,11 +65,19 @@
 							$size_id = $valArr[0];
 							$defaultPrice = min($msrpPriceArray);
 							$defaultPriceImap = $imapPriceArray[$size_id]['imap'];
+                            $clearancePrice = 0;
+							if($defaultPrice && $product->clearance > 0)
+							{
+                                $clearancePrice = round(($defaultPrice*((100-$product->clearance)/100)),2);
+                            }
 							//exit;
 							?>
 						@endif
                         <div class="pro-price py-4">
                             <span>Sale Starts at</span><span id="cost">${{$defaultPriceImap}} </span><strike style="font-size:20px"><span id="imap">${{$defaultPrice}}</span></strike>
+                            @if($clearancePrice)
+                                <strike style="font-size:20px"><span id="clearance">${{$clearancePrice}}</span></strike>
+                            @endif
                         </div>
                         <div class="pro-options bg-gray px-3 pt-3 pb-0">
 				{{ Form::open(['method' => 'GET','id'=> 'cartForm','name'=> 'cartForm']) }}
