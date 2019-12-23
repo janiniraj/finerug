@@ -231,6 +231,29 @@ class ProductController extends Controller
 				$priceArray = explode(";",$filterData['price_range']);
                 $products = $products->whereBetween('products.price', $priceArray);
             }
+
+            if(isset($filterData['clearance']) && $filterData['clearance'])
+            {
+                if($filterData['clearance'] == '0-20')
+                {
+                    $products = $products->where('products.clearance', '<=', 20);
+                }
+
+                if($filterData['clearance'] == '20-50')
+                {
+                    $products = $products->where('products.clearance', [20,50]);
+                }
+
+                if($filterData['clearance'] == '50-70')
+                {
+                    $products = $products->where('products.clearance', [50,70]);
+                }
+
+                if($filterData['clearance'] == '70-100')
+                {
+                    $products = $products->where('products.clearance', '>=', 70);
+                }
+            }
         }
 		//echo $products->tosql();
 
