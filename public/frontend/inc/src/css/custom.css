@@ -216,18 +216,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', e
 .fix-wheight{ height:200px; overflow:hidden}
 .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ background-color:#c3c3c3; width:8px;}
 .mCSB_scrollTools .mCSB_draggerRail{ background-color:#e5e5e5}
-.item {
-  transition: transform .3s;
-}
-.item:hover {
-transform: scale(1.1);
-background: white;
-z-index: 1;
-padding-top: 20px;
-padding-bottom: 20px;
-height: 200px;
-}
-
 .pro-grid{ padding-bottom:35px; }
 .pro-grid figure{position:relative; overflow:hidden; margin-bottom:10px;}
 .pro-grid figure a > img{ width:100%; height:350px;}

@@ -259,13 +259,13 @@ if(isset($_GET['price_range'])){
                                         }
                                     }
                                 @endphp
-							<div class="col-xl-3 col-md-4 col-sm-6 item">
+							<div class="col-xl-3 col-md-4 col-sm-6">
 								<div class="pro-grid sale_on favourite_on">
 									<figure>
 										<!--<div class="sale">Sale</div>-->
 										<a href="#" class="pro_favourite"><i class="fas fa-heart"></i></a>
 										@php $images = json_decode($product->main_image, true); @endphp
-										<a href="#">
+										<a href="{{ route('frontend.product.show', $product->id) }}">
 										<?php
 										if(count($images)>0){
 										?><img src="{{ URL::to('/').'/img/products/thumbnail/'.$images[0] }}" alt="Item"/>
