@@ -220,11 +220,14 @@ if(isset($_GET['price_range'])){
                     @endif
                     
                     <div class="fillter-sec">
+                        <input type="hidden" name="clearance" class="filter-input">
                     	<h2>Clearance</h2>
                         <div class="fillter-content fix-wheight">
                         	<ul class="list-unstyled m-0">
-                            	<li><a href="#">First Clearance</a></li>
-                                <li><a href="#">Second Clearance</a></li>
+                            	<li><a class="filter-option" fieldvalue="0-20" href="javascript:void(0);">Less than 20%</a></li>
+                                <li><a class="filter-option" fieldvalue="20-50" href="javascript:void(0);">20% - 50%</a></li>
+                                <li><a class="filter-option" fieldvalue="50-70" href="javascript:void(0);">50% - 70%</a></li>
+                                <li><a class="filter-option" fieldvalue="70-100" href="javascript:void(0);">More than 70%</a></li>
                             </ul>
                         </div>
                     </div>
