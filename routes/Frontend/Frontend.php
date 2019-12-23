@@ -108,6 +108,9 @@ Route::get('coupons', 'PageController@coupons')->name('page.coupons');
 });*/
 Route::group(['middleware' => 'auth', 'namespace' => 'Account', 'as' => 'account.', 'prefix' => 'account'], function () {
     Route::get('my-account', 'AccountController@myAccount')->name('my-account');
+    Route::get('edit-profile', 'AccountController@editProfile')->name('edit-profile');
+    Route::post('edit-profile', 'AccountController@saveEditProfile')->name('save-edit-profile');
+    Route::get('my-orders', 'AccountController@myOrders')->name('my-orders');
 });
 
 Route::get('visitor', 'PageController@visitor')->name('page.visitor');
