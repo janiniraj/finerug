@@ -191,26 +191,17 @@
             <h6 class="text-center mb-5">deals too good to last</h6>
             <div class="px-4 px-md-0">
           		<div id="pro-slider" class="owl-carousel text-center">
-                <div class="item">
-                    <a href="#"><img src="/frontend/inc/img/img04.jpg" alt=""/></a>
-               	  <h2><a href="#">Products Name</a></h2>    
-            	</div>
-                <div class="item">
-                    <a href="#"><img src="/frontend/inc/img/img05.jpg" alt=""/></a>
-                    <h2><a href="#">Products Name</a></h2>  
-                </div>
-                <div class="item">
-                    <a href="#"><img src="/frontend/inc/img/img04.jpg" alt=""/></a>
-               	  <h2><a href="#">Products Name</a></h2>    
-            	</div>
-                <div class="item">
-                    <a href="#"><img src="/frontend/inc/img/img05.jpg" alt=""/></a>
-                    <h2><a href="#">Products Name</a></h2>  
-                </div>
-          	</div>
+                    @foreach($clearances as $product)
+                        @php $images = json_decode($product->main_image, true); @endphp
+                        <div class="item clearance-items">
+                            <a href="{{ route('frontend.product.show', $product->id) }}"><img src="{{ URL::to('/').'/img/products/thumbnail/'.$images[0] }}" alt=""/></a>
+                            <h2><a href="{{ route('frontend.product.show', $product->id) }}">{{ $product->name }}</a></h2>
+                        </div>
+                    @endforeach
+          	    </div>
             </div>
             <div class="text-center pt-4">
-            	<a href="#" class="btn btn-primary btn-lg">VIEW ALL</a>
+            	<a href="{{ route('frontend.product.product-by-type').'?type=rug'}}" class="btn btn-primary btn-lg">VIEW ALL</a>
             </div>
         </div>
     </section>

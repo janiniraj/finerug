@@ -524,3 +524,7 @@ height: 200px;
   -webkit-transform: scale(0.7);
   border: 2px rgba(255,255,255,0.7) dashed;
 }
+
+.clearance-items img {
+  max-height: 300px;
+}

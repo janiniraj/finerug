@@ -43,13 +43,16 @@ class FrontendController extends Controller
 
         $colorList      = $this->color->getAllActive();
 
+        $clearances    = $this->product->query()->where('clearance', '>=', 0)->orderBy('clearance', 'DESC')->limit(10)->get();
+
         return view('frontend.index')->with([
             'categories'    => $categories,
             'slides'        => $slides,
             'collections'   => $collections,
             'newArrivals'   => $newArrivals,
             'furnitures'	=> $furnitures,
-            'colorList'     => $colorList
+            'colorList'     => $colorList,
+            'clearances'    => $clearances
         ]);
     }
 
