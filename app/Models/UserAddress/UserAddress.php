@@ -17,7 +17,7 @@ class UserAddress extends Model
      */
     protected $table;
 
-    protected $fillable = ["name", "status"];
+    protected $fillable = ["name", "status", 'is_deleted'];
 
     public function __construct(array $attributes = [])
     {

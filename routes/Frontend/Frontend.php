@@ -111,6 +111,10 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Account', 'as' => 'account
     Route::get('edit-profile', 'AccountController@editProfile')->name('edit-profile');
     Route::post('edit-profile', 'AccountController@saveEditProfile')->name('save-edit-profile');
     Route::get('my-orders', 'AccountController@myOrders')->name('my-orders');
+    Route::get('my-addresses', 'AccountController@myAddresses')->name('my-addresses');
+    Route::get('delete-address/{id}', 'AccountController@deleteAddress')->name('delete-address');
+    Route::get('edit-address/{id}', 'AccountController@editAddress')->name('edit-address');
+    Route::post('edit-address', 'AccountController@saveEditAddress')->name('save-edit-address');
 });
 
 Route::get('visitor', 'PageController@visitor')->name('page.visitor');
